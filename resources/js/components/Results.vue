@@ -1,3 +1,3 @@
 <template>
-    Results
+    <Snippet></Snippet>
 </template>

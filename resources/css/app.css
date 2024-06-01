@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+    @apply text-2xl;
+}
+h2 {
+    @apply text-xl;
+    @apply mb-3;
+}
+
 a {
     @apply text-blue-700 hover:text-blue-600;
+}
+
+p {
+    @apply mb-2;
 }

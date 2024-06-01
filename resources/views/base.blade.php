@@ -8,19 +8,20 @@
 
         <title>Learn Landscapes</title>
     </head>
-    <body>
+    <body class="bg-gray-200 md:mx-16 mx-4">
         <header>
-            <div class="text-center my-8 text-2xl">Learn Landscapes</div>
+            <h1 class="text-center my-8">Learn Landscapes</h1>
         </header>
 
         <div id="app">
-            <div class="gap-6 mx-32 md:columns-2 columns-1">
-                <select name="country" class="w-full"></select>
-                <input name="search" type="text" class="w-full" placeholder="Search">
+            <div class="grid grid-cols-5 
+                gap-5 mx-auto max-w-4xl">
+                <select name="country" class="p-4 bg-white col-span-2"><option>Kyrgystan</option></select>
+                <input name="search" type="text" class="p-4 col-span-3" placeholder="Search">
             </div>
 
-            <div class="mx-16 my-8">
-                <results></results>
+            <div class="my-8">
+                <Results></Results>
             </div>
         </div>
 
