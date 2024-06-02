@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@tailwindcss/forms": "^0.5.7",
         "@vitejs/plugin-vue": "^5.0.4",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.4",
@@ -13,5 +14,20 @@
         "postcss": "^8.4.38",
         "tailwindcss": "^3.4.3",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "@ckeditor/ckeditor5-autoformat": "^41.4.2",
+        "@ckeditor/ckeditor5-basic-styles": "^41.4.2",
+        "@ckeditor/ckeditor5-block-quote": "^41.4.2",
+        "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+        "@ckeditor/ckeditor5-editor-classic": "^41.4.2",
+        "@ckeditor/ckeditor5-essentials": "^41.4.2",
+        "@ckeditor/ckeditor5-heading": "^41.4.2",
+        "@ckeditor/ckeditor5-link": "^41.4.2",
+        "@ckeditor/ckeditor5-list": "^41.4.2",
+        "@ckeditor/ckeditor5-paragraph": "^41.4.2",
+        "@ckeditor/ckeditor5-source-editing": "^41.4.2",
+        "@ckeditor/ckeditor5-theme-lark": "^41.4.2",
+        "@ckeditor/vite-plugin-ckeditor5": "^0.1.3"
     }
 }
