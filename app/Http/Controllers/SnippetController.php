@@ -13,10 +13,10 @@ class SnippetController extends Controller
     // }
 
     public function create() {
-        return view('snippets.create');
+        return inertia('snippets/Create');
     }
 
-    public function store(Request $request): View {
+    public function store(Request $request) {
         $validated = $request->validate(
             [
                 'name' => 'required|string|max:150',
@@ -29,11 +29,13 @@ class SnippetController extends Controller
         );
 
         $snippet = Snippet::create($validated);
+
+        return redirect()->route('snippets.show');
     }
 
-    // public function show(): View {
-
-    // }
+    public function show(): View {
+        return view('snippets.show');
+    }
 
     // public function edit(): View {
 

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { createRequire } from 'node:module';
 const require = createRequire( import.meta.url );
+import path from 'path'
 
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue'; 
@@ -27,6 +28,9 @@ export default defineConfig({
     resolve: { 
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
+            '@': path.resolve(__dirname, './resources'),
+            '@components': path.resolve(__dirname, './resources/js/components'),
+            '@pages': path.resolve(__dirname, './resources/js/pages'),
         },
     },
 });

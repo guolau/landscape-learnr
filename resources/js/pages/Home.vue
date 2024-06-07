@@ -1,11 +1,4 @@
-@extends('layouts.base')
-
-@push('head')
-    @vite(['resources/js/app.js'])
-@endpush
-
-@section('content')
-<main id="app">
+<template>
     <div class="grid grid-cols-5 
         gap-5 mx-auto max-w-4xl">
         <select name="country" class="form-input col-span-2"><option>Kyrgystan</option></select>
@@ -17,6 +10,12 @@
     <div class="my-8">
         <Results></Results>
     </div>
-</main>
-@endsection
+</template>
 
+<script setup>
+import Results from '../components/Results.vue';
+
+defineProps({
+    name: String
+});
+</script>

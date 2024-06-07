@@ -1,5 +1,5 @@
 <template>
-    <section class="ll-section grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
+    <section class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5">
         <div class="xl:col-span-2 col-span-1">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/American_robin_%2871307%29.jpg/799px-American_robin_%2871307%29.jpg" alt="This is some alt text">
         </div>
