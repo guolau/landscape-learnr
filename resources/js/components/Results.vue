@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import Snippet from './Snippet.vue';
+import Snippet from "./Snippet.vue";
 </script>

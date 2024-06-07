@@ -1,10 +1,10 @@
-import { createApp, h } from 'vue';
-import { createInertiaApp, Link, Head } from '@inertiajs/vue3';
-import Base from './layouts/Base.vue';
+import { createApp, h } from "vue";
+import { createInertiaApp, Link, Head } from "@inertiajs/vue3";
+import Base from "./layouts/Base.vue";
 
 createInertiaApp({
-    resolve: name => {
-        const pages = import.meta.glob('./pages/**/*.vue', { eager: true });
+    resolve: (name) => {
+        const pages = import.meta.glob("./pages/**/*.vue", { eager: true });
         let page = pages[`./pages/${name}.vue`];
         page.default.layout = page.default.layout || Base;
         return page;
@@ -13,15 +13,14 @@ createInertiaApp({
         const app = createApp({ render: () => h(App, props) });
 
         app.config.globalProperties.$route = route;
-        
-        app
-            .use(plugin)
-            .component('Link', Link)
-            .component('Head', Head)
+
+        app.use(plugin)
+            .component("Link", Link)
+            .component("Head", Head)
             .mount(el);
     },
     progress: {
-        color: '#0f766e',
+        color: "#0f766e",
     },
-    title: (title) => (title ? title + ' | ' : '') +  'Learn Landscapes',
-})
+    title: (title) => (title ? title + " | " : "") + "Learn Landscapes",
+});
