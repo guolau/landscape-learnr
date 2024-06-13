@@ -1,16 +1,24 @@
 <template>
     <div
         class="ll-form-group"
-        :class="[classes, { 'll-input-error': $page.props.errors[name] }]"
+        :class="[
+            wrapperClasses,
+            { 'll-input-error': $page.props.errors[name] },
+        ]"
     >
-        <label :for="name">{{ label }}</label>
-        <input
-            :id="name"
-            :name="name"
-            type="text"
-            class="form-input"
-            v-model="form[name]"
-        />
+        <label v-if="showLabel" :for="name">{{ label }}</label>
+        <div class="flex">
+            <input
+                :id="name"
+                :name="name"
+                type="text"
+                class="ll-form-input"
+                :value="modelValue"
+                :class="inputClasses"
+                @input="$emit('update:modelValue', $event.target.value)"
+            />
+            <slot name="after"></slot>
+        </div>
         <small :if="$page.props.errors[name]" class="text-rose-700">
             {{ $page.props.errors[name] }}
         </small>
@@ -28,7 +36,12 @@ const props = defineProps({
             return toTitleCase(rawProps.name);
         },
     },
-    classes: String,
-    form: Object,
+    wrapperClasses: String,
+    inputClasses: String,
+    modelValue: String,
+    showLabel: {
+        type: Boolean,
+        default: true,
+    },
 });
 </script>

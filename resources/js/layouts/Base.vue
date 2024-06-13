@@ -12,7 +12,16 @@
         </Link>
     </header>
 
-    <slot />
+    <IconoirProvider
+        :icon-props="{
+            'stroke-width': 1.7,
+            width: '1em',
+            height: '1.05em',
+            class: 'iconoir-svg',
+        }"
+    >
+        <slot />
+    </IconoirProvider>
 
     <footer class="my-8">
         <div class="flex items-center gap-4 justify-center">
@@ -25,3 +34,7 @@
         </div>
     </footer>
 </template>
+
+<script setup>
+import { IconoirProvider } from "@iconoir/vue";
+</script>

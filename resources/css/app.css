@@ -20,12 +20,12 @@ p {
     @apply mb-2;
 }
 
-button {
-    @apply py-2 px-3 bg-teal-800 hover:bg-teal-700 text-neutral-50 rounded;
-}
-
 hr {
     @apply my-8;
+}
+
+.iconoir-svg {
+    @apply align-[-10%] inline-block;
 }
 
 /*
@@ -44,7 +44,7 @@ section {
 */
 /* Form groups consist of a label and an input. */
 .ll-form-group {
-    @apply block my-3;
+    @apply block mt-3;
 }
 
 .ll-form-group label {
@@ -52,14 +52,22 @@ section {
 }
 
 /* Form rows contain multiple form groups, all of which we try to squeeze on one line. */
-.ll-form-row {
+.ll-form-row-grid {
     @apply grid gap-3 grid-cols-12;
 }
 
-input.form-input,
-textarea.form-input,
-select.form-input {
-    @apply w-full block border-neutral-300 rounded;
+.ll-form-row-flex {
+    @apply flex gap-3 items-end;
+}
+
+input.ll-form-input:not([type="checkbox"]),
+textarea.ll-form-input,
+select.ll-form-input {
+    @apply w-full block border-neutral-300 rounded focus:ring-blue-500 focus:ring-inset;
+}
+
+input.ll-form-input[type="checkbox"] {
+    @apply block border-neutral-300 rounded
 }
 
 .ll-input-error input,
@@ -75,4 +83,19 @@ select.form-input {
 }
 .ck-editor__editable_inline:not(.ck-comment__input *) {
     @apply h-72 overflow-y-auto;
+}
+
+/*
+    Buttons
+*/
+button {
+    @apply py-2 px-3 rounded;
+}
+
+.ll-btn-primary {
+    @apply bg-teal-800 hover:bg-teal-700 text-neutral-50;
+}
+
+.ll-btn-secondary {
+    @apply bg-neutral-200 hover:bg-neutral-300;
 }

@@ -8,3 +8,16 @@ export const toTitleCase = (str) => {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 };
+
+/**
+ * Returns false if all the properties in the given object are falsy.
+ * @param {Object} obj
+ * @returns Boolean
+ */
+export const isObjectEmpty = (obj) => {
+    console.log(
+        obj,
+        Object.values(obj).every((prop) => !prop),
+    );
+    return Object.values(obj).every((prop) => !prop);
+};
