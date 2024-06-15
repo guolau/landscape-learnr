@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Snippet::class)
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('title', length: 500);
+            $table->string('title', length: 100);
             $table->string('url', length: 250);
 
             $table->timestamps();

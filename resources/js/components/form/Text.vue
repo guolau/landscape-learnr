@@ -16,6 +16,7 @@
                 :value="modelValue"
                 :class="inputClasses"
                 @input="$emit('update:modelValue', $event.target.value)"
+                v-bind="$attrs"
             />
             <slot name="after"></slot>
         </div>
@@ -43,5 +44,9 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+});
+
+defineOptions({
+    inheritAttrs: false,
 });
 </script>

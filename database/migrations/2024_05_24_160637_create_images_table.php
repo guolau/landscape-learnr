@@ -19,13 +19,13 @@ return new class extends Migration
             $table->foreignIdFor(Snippet::class)
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('thumbnail_path', length: 250);
-            $table->string('image_path', length: 250);
-            $table->string('alt_text', length: 150);
-            $table->string('attribution', length: 250);
-            $table->string('license', length: 50);
-            $table->string('license_url', length: 250);
-            $table->string('source_url', length: 250);
+            $table->string('thumbnail_path', length: 250)->nullable();
+            $table->string('image_path', length: 250)->nullable();
+            $table->string('alt_text', length: 150)->nullable();
+            $table->string('attribution', length: 250)->nullable();
+            $table->string('license', length: 50)->nullable();
+            $table->string('license_url', length: 250)->nullable();
+            $table->string('source_url', length: 250)->nullable();
 
             $table->timestamps();
 

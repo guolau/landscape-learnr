@@ -15,9 +15,5 @@ export const toTitleCase = (str) => {
  * @returns Boolean
  */
 export const isObjectEmpty = (obj) => {
-    console.log(
-        obj,
-        Object.values(obj).every((prop) => !prop),
-    );
     return Object.values(obj).every((prop) => !prop);
 };

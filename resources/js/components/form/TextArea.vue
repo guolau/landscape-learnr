@@ -11,11 +11,11 @@
             v-if="!is_html_editor"
             :id="name"
             :name="name"
-            :rows="rows"
             class="ll-form-input"
             :class="{ 'll-html-editor !hidden': is_html_editor }"
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
+            v-bind="$attrs"
         ></textarea>
         <component
             v-if="is_html_editor"
@@ -46,15 +46,15 @@ const props = defineProps({
         },
     },
     modelValue: String,
-    rows: {
-        type: Number,
-        default: 10,
-    },
     wrapperClasses: String,
     is_html_editor: {
         type: Boolean,
         default: false,
     },
+});
+
+defineOptions({
+    inheritAttrs: false,
 });
 
 let ckeditorText = ref(props.modelValue);

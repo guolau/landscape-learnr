@@ -17,14 +17,16 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(TagType::class)
+                ->nullable()
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->string('name', length: 50);
-            $table->string('description', length: 250);
+            $table->string('description', length: 250)->nullable();
             $table->foreignId('parent_id')
+                ->nullable()
                 ->constrained(
                     table: 'tags', indexName: 'id'
-                )->onDelete('cascade');
+                )->onDelete('set null');
 
             $table->timestamps();
         });
