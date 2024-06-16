@@ -7,6 +7,7 @@
         ]"
     >
         <label v-if="showLabel" :for="name">{{ label }}</label>
+        <p class="ll-input-hint"><slot name="hint"></slot></p>
         <div class="flex">
             <input
                 :id="name"

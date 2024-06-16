@@ -7,6 +7,7 @@
         ]"
     >
         <label :for="name">{{ label }}</label>
+        <p class="ll-input-hint"><slot name="hint"></slot></p>
         <textarea
             v-if="!is_html_editor"
             :id="name"

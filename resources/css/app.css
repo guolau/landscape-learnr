@@ -42,13 +42,17 @@ section {
 /*
     Forms
 */
-/* Form groups consist of a label and an input. */
+/* Form groups consist of a label, input hints, and an input. */
 .ll-form-group {
     @apply block mt-3;
 }
 
 .ll-form-group label {
     @apply block mb-1;
+}
+
+.ll-input-hint {
+    @apply text-xs text-neutral-500;
 }
 
 /* Form rows contain multiple form groups, all of which we try to squeeze on one line. */

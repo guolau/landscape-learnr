@@ -40,27 +40,52 @@
                             :rows="3"
                             v-model="form.images[index].alt_text"
                             maxlength="150"
-                        />
+                        >
+                            <template v-slot:hint
+                                >Alternative text for this image. See this guide
+                                on
+                                <a
+                                    href="https://accessibility.huit.harvard.edu/describe-content-images"
+                                    target="_blank"
+                                    >writing alt text</a
+                                >.
+                            </template>
+                        </TextArea>
                         <TextArea
                             :name="`images.${index}.attribution`"
                             label="Attribution"
                             :rows="2"
                             v-model="form.images[index].attribution"
                             maxlength="250"
-                        />
+                        >
+                            <template v-slot:hint
+                                >Give credit to this image's creator. See this
+                                guide on
+                                <a
+                                    href="https://wiki.creativecommons.org/wiki/Recommended_practices_for_attribution"
+                                    target="_blank"
+                                    >attribution</a
+                                >.
+                            </template>
+                        </TextArea>
                         <Text
                             :name="`images.${index}.source_url`"
                             label="Source URL"
                             v-model="form.images[index].source_url"
                             maxlength="250"
-                        />
+                        >
+                            <template v-slot:hint
+                                >Link to where you found the image. Will be used
+                                with the Attribution field.
+                            </template>
+                        </Text>
                     </div>
                 </div>
 
                 <div class="ll-form-row-grid">
                     <Text
                         :name="`images.${index}.license`"
-                        label="License"
+                        label="License Name"
                         wrapperClasses="sm:col-span-4 col-span-12"
                         v-model="form.images[index].license"
                         maxlength="50"
@@ -78,6 +103,22 @@
 
         <section>
             <h2>Street View Links</h2>
+
+            <p class="ll-input-hint !text-sm">
+                Include links to
+                <a
+                    href="https://www.google.com/maps/@-17.8751973,-70.1033153,3a,75y,20.74h,92.04t/data=!3m7!1e1!3m5!1sdystOSZj20URWDN4CDk1pw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DdystOSZj20URWDN4CDk1pw%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D349.01303%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192?coh=205409&entry=ttu"
+                    target="_blank"
+                    >Google Street View</a
+                >
+                that show examples of this snippet's topic. Visit
+                <a
+                    href="https://www.google.com/maps/@33.0099493,-44.3465048,3z?entry=ttu"
+                    target="_blank"
+                    >Google Maps</a
+                >
+                to get started.
+            </p>
 
             <div
                 v-for="(link, index) in form.street_view_links"
@@ -105,6 +146,11 @@
 
         <section>
             <h2>Tags</h2>
+
+            <p class="ll-input-hint !text-sm">
+                You can manage tag descriptions and categories in the
+                <a href="" target="_blank">Tag Manager</a> (coming soon).
+            </p>
 
             <Text
                 name="tags"
