@@ -72,7 +72,7 @@
                             :name="`images.${index}.source_url`"
                             label="Source URL"
                             v-model="form.images[index].source_url"
-                            maxlength="250"
+                            maxlength="500"
                         >
                             <template v-slot:hint
                                 >Link to where you found the image. Will be used
@@ -95,7 +95,7 @@
                         label="License URL"
                         wrapperClasses="sm:col-span-8 col-span-12"
                         v-model="form.images[index].license_url"
-                        maxlength="250"
+                        maxlength="500"
                     />
                 </div>
             </div>
@@ -139,7 +139,7 @@
                     wrapperClasses="sm:col-span-8 col-span-6 !mb-0"
                     v-model="form.street_view_links[index].url"
                     :showLabel="!index"
-                    maxlength="250"
+                    maxlength="500"
                 />
             </div>
         </section>

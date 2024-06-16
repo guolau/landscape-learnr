@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('alt_text', length: 150)->nullable();
             $table->string('attribution', length: 250)->nullable();
             $table->string('license', length: 50)->nullable();
-            $table->string('license_url', length: 250)->nullable();
-            $table->string('source_url', length: 250)->nullable();
+            $table->string('license_url', length: 500)->nullable();
+            $table->string('source_url', length: 500)->nullable();
 
             $table->timestamps();
 

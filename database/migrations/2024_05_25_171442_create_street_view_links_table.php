@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->string('title', length: 100);
-            $table->string('url', length: 250);
+            $table->string('url', length: 500);
 
             $table->timestamps();
 

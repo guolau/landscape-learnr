@@ -29,13 +29,13 @@ class SnippetController extends Controller
                 'images.*.file' => 'nullable|file|max:512|mimes:jpeg,png,gif',
                 'images.*.alt_text' => 'nullable|string|max:150',
                 'images.*.attribution' => 'nullable|string|max:250',
-                'images.*.source_url' => 'nullable|url|max:250',
+                'images.*.source_url' => 'nullable|url|max:500',
                 'images.*.license' => 'nullable|string|max:50',
-                'images.*.license_url' => 'nullable|url|max:250',
+                'images.*.license_url' => 'nullable|url|max:500',
 
                 'street_view_links' => 'array|max:10',
                 'street_view_links.*.title' => 'nullable|required_with:street_view_links.*.url|string|max:100',
-                'street_view_links.*.url' => 'nullable|required_with:street_view_links.*.title|url|max:250',
+                'street_view_links.*.url' => 'nullable|required_with:street_view_links.*.title|url|max:550',
 
                 'tags' => 'array|max:20',
                 'tags.*' => 'string|max:50',
@@ -92,7 +92,7 @@ class SnippetController extends Controller
             $snippet->tags()->attach($tag->id);
         }
 
-        // return redirect()->route('snippets.show');
+        // return redirect()->route('snippets.show', $snippet);
     }
 
     public function show(): View {
