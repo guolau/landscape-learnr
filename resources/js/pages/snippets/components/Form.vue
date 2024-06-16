@@ -28,12 +28,12 @@
                     <File
                         :name="`images.${index}.file`"
                         label="Image"
-                        wrapperClasses="col-span-6"
+                        wrapperClasses="sm:col-span-6 col-span-12"
                         v-model="form.images[index].file"
                         @update:modelValue="onImageInput"
                     />
 
-                    <div class="col-span-6">
+                    <div class="sm:col-span-6 col-span-12">
                         <TextArea
                             :name="`images.${index}.alt_text`"
                             label="Alt Text"
@@ -61,14 +61,14 @@
                     <Text
                         :name="`images.${index}.license`"
                         label="License"
-                        wrapperClasses="col-span-4"
+                        wrapperClasses="sm:col-span-4 col-span-12"
                         v-model="form.images[index].license"
                         maxlength="50"
                     />
                     <Text
                         :name="`images.${index}.license_url`"
                         label="License URL"
-                        wrapperClasses="col-span-8"
+                        wrapperClasses="sm:col-span-8 col-span-12"
                         v-model="form.images[index].license_url"
                         maxlength="250"
                     />
@@ -87,7 +87,7 @@
                 <Text
                     :name="`street_view_links.${index}.title`"
                     label="Title"
-                    wrapperClasses="col-span-4 !mb-0"
+                    wrapperClasses="sm:col-span-4 col-span-6 !mb-0"
                     v-model="form.street_view_links[index].title"
                     :showLabel="!index"
                     maxlength="100"
@@ -95,7 +95,7 @@
                 <Text
                     :name="`street_view_links.${index}.url`"
                     label="URL"
-                    wrapperClasses="col-span-8 !mb-0"
+                    wrapperClasses="sm:col-span-8 col-span-6 !mb-0"
                     v-model="form.street_view_links[index].url"
                     :showLabel="!index"
                     maxlength="250"
@@ -234,6 +234,8 @@ updateStreetViewLinkInputs();
 let tagInput = ref();
 
 let onAddTag = () => {
+    tagInput.value = tagInput.value.trim();
+
     if (tagInput.value && !form.tags.includes(tagInput.value)) {
         form.tags.push(tagInput.value);
     }
