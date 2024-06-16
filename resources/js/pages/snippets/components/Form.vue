@@ -7,7 +7,7 @@
         <section>
             <h2>Title and Body</h2>
 
-            <Text name="name" v-model="form.name" max-length="150" required />
+            <Text name="title" v-model="form.title" max-length="150" required />
             <TextArea
                 name="body_html"
                 label="Body"

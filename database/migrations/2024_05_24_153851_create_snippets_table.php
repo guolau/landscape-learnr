@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', length: 150);
+            $table->string('title', length: 150);
             $table->text('body_html');
             $table->timestamp('revised_at')->nullable();
 

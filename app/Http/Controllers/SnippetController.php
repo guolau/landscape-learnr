@@ -22,7 +22,7 @@ class SnippetController extends Controller
     public function store(Request $request) {
         $validated = collect($request->validate(
             [
-                'name' => 'required|string|max:150',
+                'title' => 'required|string|max:150',
                 'body_html' => 'nullable|string|max:65500',
 
                 'images' => 'array|max:10',
@@ -58,7 +58,7 @@ class SnippetController extends Controller
             ]
         ));
         
-        $snippet = Snippet::create($validated->only(['name', 'body_html'])->toArray());
+        $snippet = Snippet::create($validated->only(['title', 'body_html'])->toArray());
         
         // handle image inputs
         foreach($validated['images'] as $image_input) {
