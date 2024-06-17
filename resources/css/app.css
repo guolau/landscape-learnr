@@ -103,3 +103,7 @@ button {
 .ll-btn-secondary {
     @apply bg-neutral-200 hover:bg-neutral-300 hover:no-underline text-neutral-800;
 }
+
+.ll-btn-outline {
+    @apply border-solid border border-teal-700 hover:bg-teal-50 hover:no-underline text-neutral-800;
+}

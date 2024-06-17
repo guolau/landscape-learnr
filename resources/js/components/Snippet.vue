@@ -4,10 +4,15 @@
     >
         <div class="xl:col-span-2 col-span-1">
             <div>
-                <img
-                    :src="asset(`storage/${mainImage.image_path}`)"
-                    :alt="snippet.images[0].alt_text"
-                />
+                <a
+                    :href="asset(`storage/${mainImage.image_path}`)"
+                    target="_blank"
+                >
+                    <img
+                        :src="asset(`storage/${mainImage.image_path}`)"
+                        :alt="snippet.images[0].alt_text"
+                    />
+                </a>
             </div>
             <div class="flex gap-0.5 mt-2">
                 <img
@@ -32,20 +37,25 @@
                     <a
                         v-for="link in snippet.street_view_links"
                         :href="link.url"
-                        class="ll-btn-primary py-1 p-3 text-sm !rounded-full"
+                        class="ll-btn-outline py-1 p-3 text-sm !rounded-full"
                         target="_blank"
                     >
-                        <Link /> {{ link.title }}
+                        {{ link.title }} <OpenNewWindow />
                     </a>
                 </div>
                 <div class="flex gap-2 items-center">
                     Tags:
                     <a
                         v-for="tag in snippet.tags"
-                        class="ll-btn-secondary py-1 p-3 bg-neutral-200 rounded-full text-sm"
+                        class="ll-btn-secondary py-1 p-3 rounded-full text-sm"
                         href="#"
                         >{{ tag.name }}
                     </a>
+                </div>
+                <div class="text-sm mt-2">
+                    <a :href="$route('snippets.show', snippet.id)"
+                        ><Link /> Permalink</a
+                    >
                 </div>
             </div>
         </div>
@@ -53,7 +63,7 @@
 </template>
 
 <script setup>
-import { Link } from "@iconoir/vue";
+import { Link, OpenNewWindow, Hashtag } from "@iconoir/vue";
 import { asset } from "@components/form/Utils.js";
 import { ref } from "vue";
 

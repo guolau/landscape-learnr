@@ -3,15 +3,6 @@
         <title>Learn Landscapes</title>
     </Head>
 
-    <header class="py-6 text-center">
-        <Link
-            :href="$route('home')"
-            class="text-xl text-neutral-800 !no-underline"
-        >
-            Learn Landscapes
-        </Link>
-    </header>
-
     <IconoirProvider
         :icon-props="{
             'stroke-width': 1.7,
@@ -20,21 +11,33 @@
             class: 'iconoir-svg',
         }"
     >
-        <slot />
-    </IconoirProvider>
+        <header class="py-6 text-center">
+            <Link
+                :href="$route('home')"
+                class="text-xl text-neutral-800 !no-underline"
+            >
+                Learn Landscapes
+            </Link>
+        </header>
 
-    <footer class="my-8">
-        <div class="flex items-center gap-4 justify-center">
-            <div>Made with ♥ by Laura</div>
-            <div>
-                <a href="https://github.com/guolau/learn-landscapes"
-                    >View on GitHub</a
-                >
+        <slot />
+
+        <footer class="my-8">
+            <div class="flex items-center gap-4 justify-center">
+                <div>
+                    Made with
+                    <HeartSolid class="text-rose-800"></HeartSolid> by Laura
+                </div>
+                <div>
+                    <a href="https://github.com/guolau/learn-landscapes"
+                        >View on GitHub</a
+                    >
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </IconoirProvider>
 </template>
 
 <script setup>
-import { IconoirProvider } from "@iconoir/vue";
+import { IconoirProvider, HeartSolid } from "@iconoir/vue";
 </script>
