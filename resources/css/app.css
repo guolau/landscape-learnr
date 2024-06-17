@@ -97,9 +97,9 @@ button {
 }
 
 .ll-btn-primary {
-    @apply bg-teal-800 hover:bg-teal-700 text-neutral-50;
+    @apply bg-teal-800 hover:bg-teal-700 hover:no-underline text-neutral-50;
 }
 
 .ll-btn-secondary {
-    @apply bg-neutral-200 hover:bg-neutral-300;
+    @apply bg-neutral-200 hover:bg-neutral-300 hover:no-underline text-neutral-800;
 }

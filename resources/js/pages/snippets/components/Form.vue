@@ -1,9 +1,5 @@
 <template>
-    <form
-        @submit.prevent="submit"
-        v-on:keydown.enter.prevent=""
-        enctype="multipart/form-data"
-    >
+    <form @submit.prevent="submit" enctype="multipart/form-data">
         <section>
             <h2>Title and Body</h2>
 
@@ -113,7 +109,7 @@
                 >
                 that show examples of this snippet's topic. Visit
                 <a
-                    href="https://www.google.com/maps/@33.0099493,-44.3465048,3z?entry=ttu"
+                    href="https://www.google.com/maps/@31.5236685,8.915214,3z?entry=ttu"
                     target="_blank"
                     >Google Maps</a
                 >
@@ -158,6 +154,7 @@
                 wrapperClasses="max-w-sm"
                 inputClasses="!rounded-r-none"
                 v-model="tagInput"
+                v-on:keydown.enter.prevent=""
                 @keyup.enter="onAddTag"
                 maxlength="50"
             >
@@ -175,7 +172,7 @@
             <div class="flex flex-wrap mt-3 gap-3">
                 <div
                     v-for="tag in form.tags"
-                    class="py-2 pl-5 pr-2 bg-gray-200 rounded-full"
+                    class="py-2 pl-5 pr-2 bg-neutral-200 rounded-full"
                 >
                     {{ tag }}
                     <button

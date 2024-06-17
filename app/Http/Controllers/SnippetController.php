@@ -92,11 +92,13 @@ class SnippetController extends Controller
             $snippet->tags()->attach($tag->id);
         }
 
-        // return redirect()->route('snippets.show', $snippet);
+        return redirect()->route('snippets.show', $snippet);
     }
 
-    public function show(): View {
-        return view('snippets.show');
+    public function show(Snippet $snippet) {
+        return inertia('snippets/Show', [
+            'snippet' => $snippet->load('images', 'street_view_links', 'tags')
+        ]);
     }
 
     // public function edit(): View {

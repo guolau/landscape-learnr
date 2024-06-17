@@ -17,3 +17,13 @@ export const toTitleCase = (str) => {
 export const isObjectEmpty = (obj) => {
     return Object.values(obj).every((prop) => !prop);
 };
+
+/**
+ * Returns a URL for the given asset path.
+ * @param {*} path
+ * @returns String
+ */
+export const asset = (path) => {
+    var base_path = window._asset || "";
+    return base_path + path;
+};

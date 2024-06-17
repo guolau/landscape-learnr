@@ -6,6 +6,9 @@
         @vite(['resources/js/app.js', 'resources/css/app.css'])
         @routes()
         @inertiaHead
+        <script>
+            window._asset = '{{ asset('') }}';
+        </script>
     </head>
     <body class="text-neutral-800 bg-neutral-200 mx-auto max-w-7xl">
         @inertia
