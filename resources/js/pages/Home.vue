@@ -14,7 +14,7 @@
     <h1 class="text-center my-8">Results for ...</h1>
 
     <div class="my-8">
-        <Results></Results>
+        <!-- <Results></Results> -->
     </div>
 </template>
 

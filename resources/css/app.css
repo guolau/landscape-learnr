@@ -107,3 +107,29 @@ button {
 .ll-btn-outline {
     @apply border-solid border border-teal-700 hover:bg-teal-50 hover:no-underline text-neutral-800;
 }
+
+/*
+    Nav
+*/
+nav li {
+    @apply hover:bg-neutral-300;
+}
+
+/*
+    Dropdown
+*/
+.ll-dropdown-btn {
+    @apply py-3 px-5;
+}
+
+.ll-dropdown-content {
+    @apply bg-white shadow-md hidden absolute z-10 w-48;
+}
+
+.ll-dropdown:hover .ll-dropdown-content, .ll-dropdown:focus-within .ll-dropdown-content {
+    @apply block;
+}
+
+.ll-dropdown-content a {
+    @apply block py-3 px-5 hover:bg-neutral-100 text-neutral-800 no-underline;
+}
