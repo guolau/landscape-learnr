@@ -22,8 +22,9 @@
 
                 <ul class="h-full">
                     <li
-                        class="ll-dropdown ll-dropdown-align-right h-full"
+                        class="ll-dropdown h-full"
                         aria-haspopup="true"
+                        v-if="user && user.is_admin"
                     >
                         <button class="ll-dropdown-btn h-full">
                             Admin <NavArrowDown />
@@ -39,8 +40,32 @@
                         </ul>
                     </li>
                 </ul>
+
+                <ul class="h-full ml-auto mr-0">
+                    <li
+                        class="ll-dropdown ll-dropdown-align-right h-full"
+                        aria-haspopup="true"
+                        v-if="user && user.is_admin"
+                    >
+                        <button class="ll-dropdown-btn h-full">
+                            {{ user.username }} <NavArrowDown />
+                        </button>
+
+                        <ul class="ll-dropdown-content" aria-label="submenu">
+                            <li>
+                                <Link :href="$route('logout')" method="post">
+                                    Log out
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </nav>
         </header>
+
+        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+            {{ status }}
+        </div>
 
         <slot />
 
@@ -62,4 +87,12 @@
 
 <script setup>
 import { IconoirProvider, HeartSolid, NavArrowDown } from "@iconoir/vue";
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
+
+const page = usePage();
+
+const user = computed(() => page.props.auth.user);
+
+const status = computed(() => page.props.status);
 </script>

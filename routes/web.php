@@ -9,3 +9,5 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('snippets', Controllers\SnippetController::class);
+
+require __DIR__.'/auth.php';

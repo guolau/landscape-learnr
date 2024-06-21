@@ -133,3 +133,11 @@ nav li {
 .ll-dropdown-content a {
     @apply block py-3 px-5 hover:bg-neutral-100 text-neutral-800 no-underline;
 }
+
+.ll-dropdown-align-right {
+    @apply relative;
+}
+
+.ll-dropdown-align-right ul {
+    @apply right-0;
+}
