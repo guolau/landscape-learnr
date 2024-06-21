@@ -22,5 +22,5 @@ createInertiaApp({
     progress: {
         color: "#0f766e",
     },
-    title: (title) => (title ? title + " | " : "") + "Learn Landscapes",
+    title: (title) => (title ? title + " | " : "") + "LandscapeLearnr",
 });

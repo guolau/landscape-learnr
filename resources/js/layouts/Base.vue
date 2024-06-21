@@ -1,7 +1,5 @@
 <template>
-    <Head>
-        <title>Learn Landscapes</title>
-    </Head>
+    <Head> </Head>
 
     <IconoirProvider
         :icon-props="{
@@ -19,7 +17,7 @@
                     :href="$route('home')"
                     class="mr-5 text-xl text-neutral-800 !no-underline ml-5"
                 >
-                    Learn Landscapes
+                    LandscapeLearnr
                 </Link>
 
                 <ul class="h-full">
@@ -53,7 +51,7 @@
                     <HeartSolid class="text-rose-800"></HeartSolid> by Laura
                 </div>
                 <div>
-                    <a href="https://github.com/guolau/learn-landscapes"
+                    <a href="https://github.com/guolau/landscape-learnr"
                         >View on GitHub</a
                     >
                 </div>
