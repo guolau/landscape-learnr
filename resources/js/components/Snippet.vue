@@ -3,14 +3,14 @@
         class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-7"
     >
         <div class="xl:col-span-2 col-span-1">
-            <div>
+            <div v-if="mainImage">
                 <a
                     :href="asset(`storage/${mainImage.image_path}`)"
                     target="_blank"
                 >
                     <img
                         :src="asset(`storage/${mainImage.image_path}`)"
-                        :alt="snippet.images[0].alt_text"
+                        :alt="mainImage.alt_text"
                     />
                 </a>
             </div>
@@ -74,7 +74,7 @@ let props = defineProps({
 let mainImage = ref(null);
 
 let updateMainImage = (image) => {
-    mainImage.value = image;
+    mainImage.value = image ?? null;
 };
 
 updateMainImage(props.snippet.images[0]);
