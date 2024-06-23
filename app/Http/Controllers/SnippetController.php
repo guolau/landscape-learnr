@@ -92,7 +92,11 @@ class SnippetController extends Controller
             $snippet->tags()->attach($tag->id);
         }
 
-        return redirect()->route('snippets.show', $snippet);
+        return redirect()->route('snippets.show', $snippet)
+            ->with([
+                'message' => 'Snippet successfully created', 
+                'status' => 'success'
+            ]);
     }
 
     public function show(Snippet $snippet) {

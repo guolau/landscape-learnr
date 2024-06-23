@@ -4,8 +4,8 @@
     <IconoirProvider
         :icon-props="{
             'stroke-width': 1.7,
-            width: '1em',
-            height: '1.05em',
+            width: '1.05em',
+            height: '1.15em',
             class: 'iconoir-svg',
         }"
     >
@@ -63,9 +63,10 @@
             </nav>
         </header>
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
+        <FlashMessage
+            :message="flash.message || ''"
+            :status="flash.status"
+        ></FlashMessage>
 
         <slot />
 
@@ -87,12 +88,13 @@
 
 <script setup>
 import { IconoirProvider, HeartSolid, NavArrowDown } from "@iconoir/vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import FlashMessage from "@components/FlashMessage.vue";
 
 const page = usePage();
 
 const user = computed(() => page.props.auth.user);
 
-const status = computed(() => page.props.status);
+const flash = computed(() => page.props.flash);
 </script>

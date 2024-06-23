@@ -130,7 +130,7 @@ nav li {
     @apply block;
 }
 
-.ll-dropdown-content a {
+.ll-dropdown-content a, .ll-dropdown-content button {
     @apply block py-3 px-5 hover:bg-neutral-100 text-neutral-800 no-underline;
 }
 
@@ -140,4 +140,25 @@ nav li {
 
 .ll-dropdown-align-right ul {
     @apply right-0;
+}
+
+/*
+    Flash Messages
+*/
+.ll-flash-msg {
+    @apply fixed top-4 p-4 rounded drop-shadow flex items-center gap-2
+        sm:left-1/2 sm:ml-[-32ch] sm:w-[36rem]
+        left-0 mx-5 w-11/12;
+}
+
+.ll-flash-msg-info {
+    @apply bg-blue-200 text-blue-900;
+}
+
+.ll-flash-msg-danger {
+    @apply bg-rose-200 text-rose-900;
+}
+
+.ll-flash-msg-success {
+    @apply bg-green-200 text-green-900;
 }

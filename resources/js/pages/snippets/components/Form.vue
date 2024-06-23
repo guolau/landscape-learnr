@@ -186,7 +186,14 @@
             </div>
         </section>
 
-        <button class="ll-btn-primary" type="submit">Create Snippet</button>
+        <button
+            class="ll-btn-primary"
+            type="submit"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
+        >
+            Create Snippet
+        </button>
     </form>
 </template>
 
