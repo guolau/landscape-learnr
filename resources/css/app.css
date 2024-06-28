@@ -9,7 +9,7 @@ h1 {
     @apply text-2xl mb-4;
 }
 h2 {
-    @apply text-xl mb-6 pb-1 border border-solid border-transparent border-b-neutral-200;
+    @apply text-xl mb-6;
 }
 
 a {
@@ -35,9 +35,6 @@ hr {
 .ll-panel {
     @apply my-4 p-10 bg-neutral-50 rounded shadow-md;
 }
-section {
-    @apply mb-16;
-}
 
 /*
     Forms
@@ -53,6 +50,14 @@ section {
 
 .ll-input-hint {
     @apply text-xs text-neutral-500;
+}
+
+form section {
+    @apply mb-16;
+}
+
+form h2 {
+    @apply pb-1 border border-solid border-transparent border-b-neutral-200;
 }
 
 /* Form rows contain multiple form groups, all of which we try to squeeze on one line. */
@@ -92,8 +97,8 @@ input.ll-form-input[type="checkbox"] {
 /*
     Buttons
 */
-button {
-    @apply py-2 px-3 rounded;
+button, .ll-btn {
+    @apply py-2 px-3 rounded hover:no-underline;
 }
 
 .ll-btn-primary {

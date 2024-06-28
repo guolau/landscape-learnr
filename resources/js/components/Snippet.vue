@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { Link, OpenNewWindow, Hashtag } from "@iconoir/vue";
+import { Link, OpenNewWindow } from "@iconoir/vue";
 import { asset } from "@components/form/Utils.js";
 import { ref } from "vue";
 

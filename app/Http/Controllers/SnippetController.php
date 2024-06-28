@@ -11,9 +11,13 @@ use App\Models\Image;
 
 class SnippetController extends Controller
 {
-    // public function index(): View {
-
-    // }
+    public function index() {
+        return inertia('snippets/Index', [
+            'snippets' => Snippet::orderBy('title')
+                ->with(['tags', 'images'])
+                ->paginate(25)
+        ]);
+    }
 
     public function create() {
         return inertia('snippets/Create');
