@@ -43,7 +43,7 @@
                         {{ link.title }} <OpenNewWindow />
                     </a>
                 </div>
-                <div class="flex gap-2 items-center">
+                <div class="flex flex-wrap gap-2 items-center">
                     Tags:
                     <a
                         v-for="tag in snippet.tags"
