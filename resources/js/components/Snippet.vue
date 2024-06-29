@@ -45,16 +45,16 @@
                 </div>
                 <div class="flex flex-wrap gap-2 items-center">
                     Tags:
-                    <a
+                    <Link
                         v-for="tag in snippet.tags"
                         class="ll-btn-secondary py-1 p-3 rounded-full text-sm"
                         href="#"
                         >{{ tag.name }}
-                    </a>
+                    </Link>
                 </div>
                 <div class="text-sm mt-2">
-                    <a :href="$route('snippets.show', snippet.id)"
-                        ><Link /> Permalink</a
+                    <Link :href="$route('snippets.show', snippet.id)"
+                        ><LinkIcon></LinkIcon> Permalink</Link
                     >
                 </div>
             </div>
@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { Link, OpenNewWindow } from "@iconoir/vue";
+import { Link as LinkIcon, OpenNewWindow } from "@iconoir/vue";
 import { asset } from "@components/form/Utils.js";
 import { ref } from "vue";
 

@@ -145,7 +145,7 @@
 
             <p class="ll-input-hint !text-sm">
                 You can manage tag descriptions and categories in the
-                <a href="" target="_blank">Tag Manager</a> (coming soon).
+                <Link href="" target="_blank">Tag Manager</Link> (coming soon).
             </p>
 
             <Text
