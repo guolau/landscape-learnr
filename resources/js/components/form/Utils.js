@@ -19,11 +19,68 @@ export const isObjectEmpty = (obj) => {
 };
 
 /**
+ * Returns the given object with only the given keys.
+ * @param {Object} obj
+ * @param {Array} allowedKeys Keys to keep after filtering
+ */
+export const filterProperties = (obj, allowedKeys) => {
+    if (!obj) {
+        return null;
+    }
+
+    return Object.keys(obj)
+        .filter((key) => allowedKeys.includes(key))
+        .reduce((newObj, key) => {
+            newObj[key] = obj[key];
+            return newObj;
+        }, {});
+};
+
+/**
+ * Removes extra empty rows, based on the given list of keys to check.
+ * An empty row is considered "extra" if it's got other empty rows before it.
+ * @param {Array} rows
+ * @param {Array} keysToCheck
+ */
+export const removeExtraRows = (rows, keysToCheck) => {
+    let last = filterProperties(rows[rows.length - 1], keysToCheck);
+    let nextToLast = filterProperties(rows[rows.length - 2], keysToCheck);
+
+    if (rows.length > 1 && isObjectEmpty(last) && isObjectEmpty(nextToLast)) {
+        rows.pop();
+    } else if (!last || !isObjectEmpty(last)) {
+        // create an empty object and append to end of row
+        let obj = {};
+
+        keysToCheck.forEach((key) => {
+            obj[key] = null;
+        });
+
+        rows.push(obj);
+    }
+};
+
+/**
+ * Remove all empty rows, based on the given list of keys to check.
+ * @param {Array} rows
+ * @param {Array} keysToCheck
+ * @return {Array}
+ */
+export const filterEmptyRows = (rows, keysToCheck) => {
+    return rows.filter((obj) => {
+        obj = filterProperties(obj, keysToCheck);
+        return !isObjectEmpty(obj);
+    });
+};
+
+/**
  * Returns a URL for the given asset path.
  * @param {String} path
  * @returns {String}
  */
 export const asset = (path) => {
+    if (!path) return null;
+
     var base_path = window._asset || "";
     return base_path + path;
 };

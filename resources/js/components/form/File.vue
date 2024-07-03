@@ -14,9 +14,10 @@
             accepted-file-types="image/jpeg, image/png, image/gif"
             max-file-size="512kb"
             image-validate-size-min-width="500"
-            image-validate-size-min-height="500"
-            :storeAsFile="true"
-            @input="onInput"
+            :storeAsFile="!fallbackUrl"
+            @updatefiles="onUpdateFiles"
+            @init="handleFilePondInit"
+            :filePosterFilterItem="fallbackUrl"
         />
         <small :if="$page.props.errors[name]" class="text-rose-700">
             {{ $page.props.errors[name] }}
@@ -26,7 +27,7 @@
 
 <script setup>
 import { toTitleCase } from "@components/form/Utils.js";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import vueFilePond from "vue-filepond";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
@@ -47,6 +48,7 @@ const props = defineProps({
     },
     wrapperClasses: String,
     modelValue: Object,
+    fallbackUrl: String,
 });
 
 // Set up FilePond
@@ -59,11 +61,41 @@ const FilePond = vueFilePond(
 
 const pond = ref(null);
 
-let onInput = () => {
-    if (pond.value.getFile()) {
-        emit("update:modelValue", pond.value.getFile().file);
+let handleFilePondInit = () => {
+    if (props.fallbackUrl) {
+        try {
+            pond.value.addFile(props.fallbackUrl);
+            pond.value.getFile().origin = "local"; // mark this file as already uploaded
+        } catch {
+            // if we can't load the file, that's fine. Do nothing
+        }
+    }
+};
+
+let onUpdateFiles = () => {
+    let fileItem = pond.value.getFile();
+
+    // if there's a file
+    if (fileItem) {
+        // and it's already on the server
+        if (fileItem.origin == "local") {
+            emit("update:modelValue", { file: null, action: null });
+        } else {
+            // and it's not already uploaded
+            emit("update:modelValue", {
+                file: fileItem.file,
+                action: "create",
+            });
+        }
     } else {
-        emit("update:modelValue", null);
+        // there's no file
+        if (props.fallbackUrl) {
+            // but there was one already on the server
+            emit("update:modelValue", { file: null, action: "delete" });
+        } else {
+            // and one wasn't already saved
+            emit("update:modelValue", null);
+        }
     }
 };
 </script>

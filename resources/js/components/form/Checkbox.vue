@@ -3,7 +3,7 @@
         class="ll-form-group"
         :class="[classes, { 'll-input-error': $page.props.errors[name] }]"
     >
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-2">
             <input
                 :id="name"
                 :name="name"

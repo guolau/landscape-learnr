@@ -14,6 +14,8 @@ class Image extends Model
     protected $guarded = ['id'];
 
     public function storeFile($file) {
+        $this->removeFile();
+
         $image_path = "images/{$this->id}/{$file->getClientOriginalName()}";
         Storage::disk('public')->put($image_path, file_get_contents($file));
         
@@ -27,6 +29,19 @@ class Image extends Model
         $this->update([
             'image_path' => $image_path,
             'thumbnail_path' => $thumbnail_path,
+        ]);
+    }
+
+    public function removeFile() {
+
+        Storage::disk('public')->delete([
+            $this->image_path ?? '',
+            $this->thumbnail_path ?? '',
+        ]);
+
+        $this->update([
+            'image_path' => null,
+            'thumbnail_path' => null,
         ]);
     }
 }

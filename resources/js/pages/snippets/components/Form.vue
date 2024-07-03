@@ -22,11 +22,18 @@
             >
                 <div class="ll-form-row-grid">
                     <File
-                        :name="`images.${index}.file`"
+                        :name="`images.${index}.file_input`"
                         label="Image"
                         wrapperClasses="sm:col-span-6 col-span-12"
-                        v-model="form.images[index].file"
+                        v-model="form.images[index].file_input"
                         @update:modelValue="onImageInput"
+                        :fallbackUrl="
+                            form.images[index].thumbnail_path
+                                ? asset(
+                                      `storage/${form.images[index].thumbnail_path}`,
+                                  )
+                                : null
+                        "
                     />
 
                     <div class="sm:col-span-6 col-span-12">
@@ -150,7 +157,7 @@
 
             <Text
                 name="tags"
-                label="Search Tag"
+                label="Add Tag"
                 wrapperClasses="max-w-sm"
                 inputClasses="!rounded-r-none"
                 v-model="tagInput"
@@ -186,13 +193,32 @@
             </div>
         </section>
 
+        <section v-if="snippet.id">
+            <h2>Revision</h2>
+
+            <p class="ll-input-hint !text-sm">
+                <strong>
+                    Check this box if your changes affect a user's understanding
+                    of this topic.
+                </strong>
+                For example, fixing incorrect information or adding additional
+                supporting material. Don't check this for minor edits, like
+                fixing typos or formatting. This will update the revision date
+                and indicates to users that the content is up-to-date.
+            </p>
+
+            <Checkbox name="is_revised" v-model="form.is_revised">
+                Mark this snippet as revised
+            </Checkbox>
+        </section>
+
         <button
             class="ll-btn-primary"
             type="submit"
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
         >
-            Create Snippet
+            {{ submitText }}
         </button>
     </form>
 </template>
@@ -202,89 +228,87 @@ import { ref } from "vue";
 import Text from "@components/form/Text.vue";
 import TextArea from "@components/form/TextArea.vue";
 import File from "@components/form/File.vue";
-import { router } from "@inertiajs/vue3";
-import { reactive } from "vue";
-import { isObjectEmpty } from "@components/form/Utils.js";
+import Checkbox from "@components/form/Checkbox.vue";
+import { asset, removeExtraRows } from "@components/form/Utils.js";
 import throttle from "lodash/debounce";
 import { Plus, Xmark } from "@iconoir/vue";
+import { useForm } from "@inertiajs/vue3";
+import { filterEmptyRows } from "../../../components/form/Utils";
 
-let form = reactive({
-    body_html: "",
-    images: [],
-    street_view_links: [],
-    tags: [],
+const props = defineProps({
+    snippet: {
+        type: Object,
+        default: {},
+    },
+    submitText: String,
+    method: {
+        type: String,
+        required: true,
+    },
+    action: {
+        type: String,
+        required: true,
+    },
+});
+
+const imageProps = [
+    "file_input",
+    "alt_text",
+    "attribution",
+    "source_url",
+    "license",
+    "license_url",
+];
+
+const streetViewLinkProps = ["title", "url"];
+
+let form = useForm({
+    title: props.snippet.title ?? "",
+    body_html: props.snippet.body_html ?? "",
+    images: props.snippet.images ?? [],
+    street_view_links: props.snippet.street_view_links ?? [],
+    tags: props.snippet.tags ?? [],
+    _method: props.method,
+    is_revised: false,
 });
 
 let submit = () => {
-    // remove empty array elements
-    ["images", "street_view_links"].forEach((key) => {
-        form[key] = form[key].filter((obj) => !isObjectEmpty(obj));
-    });
+    form.images = filterEmptyRows(form.images, imageProps);
+    form.street_view_links = filterEmptyRows(
+        form.street_view_links,
+        streetViewLinkProps,
+    );
 
-    router.post(route("snippets.store"), form);
+    form.post(props.action);
 };
 
 // Images logic
-let updateImageInputs = () => {
-    let inputs = form.images;
-    let last = inputs[inputs.length - 1];
-    let nextToLast = inputs[inputs.length - 2];
-
-    if (inputs.length > 1 && isObjectEmpty(last) && isObjectEmpty(nextToLast)) {
-        inputs.pop();
-    } else if (!last || !isObjectEmpty(last)) {
-        inputs.push({
-            file: null,
-            alt_text: "",
-            attribution: "",
-            source_url: "",
-            license: "",
-            license_url: "",
-        });
-    }
-};
-
 let onImageInput = throttle(
     function () {
-        updateImageInputs();
+        removeExtraRows(form.images, imageProps);
     },
     250,
     { leading: true, trailing: true },
 );
 
-updateImageInputs();
+removeExtraRows(form.images, imageProps);
 
 // Street View Links logic
-let updateStreetViewLinkInputs = () => {
-    let inputs = form.street_view_links;
-    let last = inputs[inputs.length - 1];
-    let nextToLast = inputs[inputs.length - 2];
-
-    if (inputs.length > 1 && isObjectEmpty(last) && isObjectEmpty(nextToLast)) {
-        inputs.pop();
-    } else if (!last || !isObjectEmpty(last)) {
-        inputs.push({
-            title: "",
-            url: "",
-        });
-    }
-};
-
 let onStreetViewLinkInput = throttle(
     function () {
-        updateStreetViewLinkInputs();
+        removeExtraRows(form.street_view_links, streetViewLinkProps);
     },
     250,
     { leading: true, trailing: true },
 );
 
-updateStreetViewLinkInputs();
+removeExtraRows(form.street_view_links, streetViewLinkProps);
 
 // Tags logic
 let tagInput = ref();
 
 let onAddTag = () => {
-    tagInput.value = tagInput.value.trim();
+    tagInput.value = tagInput.value?.trim();
 
     if (tagInput.value && !form.tags.includes(tagInput.value)) {
         form.tags.push(tagInput.value);

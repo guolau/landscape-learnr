@@ -14,6 +14,9 @@ class Snippet extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $casts = [
+        'revised_at' => 'datetime',
+    ];
 
     protected function bodyHtml(): Attribute {
         return Attribute::make(
@@ -22,14 +25,14 @@ class Snippet extends Model
     }
 
     public function images() {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class)->orderBy('id');
     }
 
     public function street_view_links() {
-        return $this->hasMany(StreetViewLink::class);
+        return $this->hasMany(StreetViewLink::class)->orderBy('id');
     }
 
     public function tags() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->orderBy('name');
     }
 }
