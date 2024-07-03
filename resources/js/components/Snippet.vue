@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="xl:col-span-3 col-span-1">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-3">
                 <h2 class="border-none mb-0">{{ snippet.title }}</h2>
                 <div v-html="snippet.body_html"></div>
                 <div class="flex gap-2 items-center">
@@ -37,7 +37,7 @@
                     <a
                         v-for="link in snippet.street_view_links"
                         :href="link.url"
-                        class="ll-btn-outline py-1 p-3 text-sm !rounded-full"
+                        class="ll-btn-outline py-0.5 p-3 text-sm !rounded-full"
                         target="_blank"
                     >
                         {{ link.title }} <OpenNewWindow />
@@ -47,15 +47,31 @@
                     Tags:
                     <Link
                         v-for="tag in snippet.tags"
-                        class="ll-btn-secondary py-1 p-3 rounded-full text-sm"
+                        class="ll-btn-secondary py-0.5 p-3 rounded-full text-sm"
                         href="#"
                         >{{ tag.name }}
                     </Link>
                 </div>
-                <div class="text-sm mt-2">
+                <div class="flex gap-2 text-xs">
+                    <span
+                        :title="formatDate(snippet.created_at, dateFormatOpts)"
+                    >
+                        Created {{ formatRelativeDate(snippet.created_at) }}
+                    </span>
+                    <span>•</span>
+                    <span
+                        :title="formatDate(snippet.revised_at, dateFormatOpts)"
+                    >
+                        Revised {{ formatRelativeDate(snippet.revised_at) }}
+                    </span>
+                </div>
+                <div class="text-ms flex gap-5">
                     <Link :href="$route('snippets.show', snippet.id)"
                         ><LinkIcon></LinkIcon> Permalink</Link
                     >
+                    <Link :href="$route('snippets.edit', snippet.id)"
+                        ><Edit class="mr-0.5"></Edit> Edit
+                    </Link>
                 </div>
             </div>
         </div>
@@ -63,13 +79,28 @@
 </template>
 
 <script setup>
-import { Link as LinkIcon, OpenNewWindow } from "@iconoir/vue";
-import { asset } from "@components/form/Utils.js";
+import {
+    Link as LinkIcon,
+    OpenNewWindow,
+    Edit,
+    EditPencil,
+    PlusCircle,
+} from "@iconoir/vue";
+import {
+    asset,
+    formatRelativeDate,
+    formatDate,
+} from "@components/form/Utils.js";
 import { ref } from "vue";
 
 let props = defineProps({
     snippet: Object,
 });
+
+const dateFormatOpts = {
+    dateStyle: "long",
+    timeStyle: "short",
+};
 
 let mainImage = ref(null);
 

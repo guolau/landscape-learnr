@@ -24,8 +24,12 @@ hr {
     @apply my-8;
 }
 
+.ll-text-muted {
+    @apply text-neutral-400;
+}
+
 .iconoir-svg {
-    @apply align-[-10%] inline-block;
+    @apply align-[-10%] inline-block ;
 }
 
 /*
@@ -99,6 +103,10 @@ input.ll-form-input[type="checkbox"] {
 */
 button, .ll-btn {
     @apply py-2 px-3 rounded hover:no-underline;
+}
+
+.ll-btn-sm {
+    @apply py-1 px-2 text-sm;
 }
 
 .ll-btn-primary {
