@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Snippet;
-use App\Models\StreetViewLink;
-use App\Models\Tag;
-use App\Models\Image;
 use App\Http\Requests\SnippetRequest;
+use App\Services\SnippetService;
 
 class SnippetController extends Controller
 {
+    private SnippetService $snippetService;
+
+    public function __construct(SnippetService $snippetService) {
+        $this->snippetService = $snippetService;
+    }
+
     public function index() {
         return inertia('snippets/Index', [
             'snippets' => Snippet::orderBy('title')
@@ -25,41 +29,7 @@ class SnippetController extends Controller
     }
 
     public function store(SnippetRequest $request) {
-        $validated = $request->safe()->collect();
-        
-        $snippet = Snippet::create($validated->only(['title', 'body_html'])->toArray());
-        
-        // handle image inputs
-        foreach($validated['images'] as $image_input) {
-            $image = Image::create(
-                array_merge(
-                    [
-                        'snippet_id' => $snippet->id,
-                    ],
-                    collect($image_input)->only([
-                        'alt_text', 'attribution', 'source_url', 'license', 'license_url'
-                    ])->toArray()
-                )
-            );
-           
-            if($image_input['file_input']['action'] == 'create')
-                $image->storeFile($image_input['file_input']['file']);
-        }
-
-        // handle street view links
-        foreach($validated['street_view_links'] ?? [] as $link) {
-            StreetViewLink::create([
-                'snippet_id' => $snippet->id,
-                'title' => $link['title'],
-                'url' => $link['url'],
-            ]);
-        }
-
-        // handle tags
-        foreach($validated['tags'] ?? [] as $tag_name) {
-            $tag = Tag::firstOrCreate(['name' => $tag_name]);
-            $snippet->tags()->attach($tag->id);
-        }
+        $snippet = $this->snippetService->store($request->safe()->collect());
 
         return redirect()->route('snippets.show', $snippet)
             ->with([
@@ -91,95 +61,11 @@ class SnippetController extends Controller
     }
 
     public function update(Snippet $snippet, SnippetRequest $request) {
-        $validated = $request->safe()->collect();
-        
-        $snippet->fill(
-            $validated->only(['title', 'body_html'])->toArray()
+        $this->snippetService->update(
+            $request->safe()->collect(), 
+            $snippet
         );
-
-        if($validated['is_revised']) {
-            $snippet->revised_at = now();
-        }
         
-        $snippet->save();
-        
-        // handle image inputs
-        $image_ids = [];
-        foreach($validated['images'] as $image_input) {
-            $image = Image::find($image_input['id'] ?? null);
-            // dd($image);
-            
-            if($image) {
-                $image->update(
-                    collect($image_input)->only([
-                        'alt_text', 'attribution', 'source_url', 'license', 'license_url'
-                    ])->toArray()
-                );
-
-                if($image_input['file_input'] ?? false) {
-                    if($image_input['file_input']['action'] == 'create')
-                        $image->storeFile($image_input['file_input']['file']);
-                    else if($image_input['file_input']['action'] == 'delete') {
-                        $image->removeFile();
-                    }
-                }
-            } else {
-                $image = Image::create(
-                    array_merge(
-                        [
-                            'snippet_id' => $snippet->id,
-                        ],
-                        collect($image_input)->only([
-                            'alt_text', 'attribution', 'source_url', 'license', 'license_url'
-                        ])->toArray()
-                    )
-                );
-               
-                if($image_input['file_input']['file'] ?? false)
-                    $image->storeFile($image_input['file_input']['file']);
-            }
-
-            $has_content = collect($image->attributesToArray())->only([
-                'image_path', 'alt_text', 'attribution', 'source_url', 'license', 'license_url' 
-            ])->filter()->isNotEmpty();
-            
-            if($has_content) {
-                $image_ids[] = $image->id;
-            }
-        }
-        $snippet->images()->whereNotIn('images.id', $image_ids)->delete();
-
-        // handle street view links
-        $link_ids = [];
-        foreach($validated['street_view_links'] ?? [] as $link) {
-            $model = StreetViewLink::find($link['id'] ?? null);
-    
-            if($model) {
-                $model->update([
-                    'title' => $link['title'], 
-                    'url' => $link['url']
-                ]);
-            } else {
-                $model = StreetViewLink::create([
-                    'snippet_id' => $snippet->id,
-                    'title' => $link['title'],
-                    'url' => $link['url'],
-                ]);
-            }
-
-            $link_ids[] = $model->id; 
-        }
-        $snippet->street_view_links()->whereNotIn('street_view_links.id', $link_ids)->delete();
-
-        // handle tags
-        $tag_ids = [];
-        foreach($validated['tags'] ?? [] as $tag_name) {
-            $tag = Tag::firstOrCreate(['name' => $tag_name]);
-            $tag_ids[] = $tag->id;
-        }
-
-        $snippet->tags()->sync($tag_ids);
-
         return redirect()->route('snippets.show', $snippet)
             ->with([
                 'message' => 'Snippet successfully updated', 

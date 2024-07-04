@@ -33,7 +33,6 @@ class Image extends Model
     }
 
     public function removeFile() {
-
         Storage::disk('public')->delete([
             $this->image_path ?? '',
             $this->thumbnail_path ?? '',
