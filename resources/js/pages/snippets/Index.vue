@@ -105,11 +105,7 @@
 </template>
 
 <script setup>
-import {
-    asset,
-    formatRelativeDate,
-    formatDate,
-} from "@components/form/Utils.js";
+import { asset, formatRelativeDate, formatDate } from "@components/Utils.js";
 import {
     EditPencil,
     Edit,

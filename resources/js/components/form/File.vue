@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { toTitleCase } from "@components/form/Utils.js";
+import { toTitleCase } from "@components/Utils.js";
 import { ref } from "vue";
 import vueFilePond from "vue-filepond";
 import "filepond/dist/filepond.min.css";

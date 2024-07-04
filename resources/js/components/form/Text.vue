@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { toTitleCase } from "@components/form/Utils.js";
+import { toTitleCase } from "@components/Utils.js";
 
 const props = defineProps({
     name: String,

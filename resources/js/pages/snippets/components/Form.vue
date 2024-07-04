@@ -222,11 +222,10 @@ import Text from "@components/form/Text.vue";
 import TextArea from "@components/form/TextArea.vue";
 import File from "@components/form/File.vue";
 import Checkbox from "@components/form/Checkbox.vue";
-import { asset, updateExtraRows } from "@components/form/Utils.js";
+import { updateExtraRows, filterEmptyRows } from "@components/form/Utils.js";
 import throttle from "lodash/debounce";
 import { Plus, Xmark } from "@iconoir/vue";
 import { useForm } from "@inertiajs/vue3";
-import { filterEmptyRows } from "../../../components/form/Utils";
 
 const props = defineProps({
     snippet: {

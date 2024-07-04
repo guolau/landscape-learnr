@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { toTitleCase } from "@components/form/Utils.js";
+import { toTitleCase } from "@components/Utils.js";
 import { ref } from "vue";
 
 import CKEditor from "@ckeditor/ckeditor5-vue";
