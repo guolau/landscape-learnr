@@ -1,24 +1,22 @@
 <template>
-    <div
-        v-if="message"
-        class="ll-flash-msg transition-opacity duration-500"
-        :class="[
-            `ll-flash-msg-${status}`,
-            { 'opacity-100': show },
-            { 'opacity-0': !show },
-        ]"
-    >
-        <InfoCircle v-if="status == 'info'"></InfoCircle>
-        <WarningTriangle v-if="status == 'danger'"></WarningTriangle>
-        <CheckCircle v-if="status == 'success'"></CheckCircle>
-        {{ message }}
-        <button
-            class="ml-auto mr-0 rounded-full py-0 px-1 ml-1"
-            @click="show = false"
+    <Transition name="fade">
+        <div
+            v-if="message && show"
+            class="ll-flash-msg"
+            :class="[`ll-flash-msg-${status}`, { 'opacity-100': show }]"
         >
-            <Xmark></Xmark>
-        </button>
-    </div>
+            <InfoCircle v-if="status == 'info'"></InfoCircle>
+            <WarningTriangle v-if="status == 'danger'"></WarningTriangle>
+            <CheckCircle v-if="status == 'success'"></CheckCircle>
+            {{ message }}
+            <button
+                class="ml-auto mr-0 rounded-full py-0 px-1 ml-1"
+                @click="show = false"
+            >
+                <Xmark></Xmark>
+            </button>
+        </div>
+    </Transition>
 </template>
 
 <script setup>
@@ -54,3 +52,13 @@ watch(
     },
 );
 </script>
+
+<style>
+.fade-leave-active {
+    @apply transition-opacity duration-500;
+}
+
+.fade-leave-to {
+    @apply opacity-0;
+}
+</style>
