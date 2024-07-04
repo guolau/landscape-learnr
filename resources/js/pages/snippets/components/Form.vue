@@ -27,13 +27,6 @@
                         wrapperClasses="sm:col-span-6 col-span-12"
                         v-model="form.images[index].file_input"
                         @update:modelValue="onImageInput"
-                        :fallbackUrl="
-                            form.images[index].thumbnail_path
-                                ? asset(
-                                      `storage/${form.images[index].thumbnail_path}`,
-                                  )
-                                : null
-                        "
                     />
 
                     <div class="sm:col-span-6 col-span-12">
@@ -229,7 +222,7 @@ import Text from "@components/form/Text.vue";
 import TextArea from "@components/form/TextArea.vue";
 import File from "@components/form/File.vue";
 import Checkbox from "@components/form/Checkbox.vue";
-import { asset, removeExtraRows } from "@components/form/Utils.js";
+import { asset, updateExtraRows } from "@components/form/Utils.js";
 import throttle from "lodash/debounce";
 import { Plus, Xmark } from "@iconoir/vue";
 import { useForm } from "@inertiajs/vue3";
@@ -285,24 +278,24 @@ let submit = () => {
 // Images logic
 let onImageInput = throttle(
     function () {
-        removeExtraRows(form.images, imageProps);
+        updateExtraRows(form.images, imageProps);
     },
     250,
     { leading: true, trailing: true },
 );
 
-removeExtraRows(form.images, imageProps);
+updateExtraRows(form.images, imageProps);
 
 // Street View Links logic
 let onStreetViewLinkInput = throttle(
     function () {
-        removeExtraRows(form.street_view_links, streetViewLinkProps);
+        updateExtraRows(form.street_view_links, streetViewLinkProps);
     },
     250,
     { leading: true, trailing: true },
 );
 
-removeExtraRows(form.street_view_links, streetViewLinkProps);
+updateExtraRows(form.street_view_links, streetViewLinkProps);
 
 // Tags logic
 let tagInput = ref();

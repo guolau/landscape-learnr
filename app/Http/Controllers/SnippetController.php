@@ -55,6 +55,15 @@ class SnippetController extends Controller
             return $tag->name;
         });
 
+        $snippet->images->transform(function ($image) {
+            $image->file_input = (object)[
+                'action' => null,
+                'file' => $image->thumbnail_path ? asset("storage/$image->thumbnail_path") : null,
+            ];
+
+            return $image;
+        });
+
         return inertia('snippets/Edit', [
             'snippet' => $snippet
         ]);

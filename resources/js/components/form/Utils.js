@@ -37,12 +37,12 @@ export const filterProperties = (obj, allowedKeys) => {
 };
 
 /**
- * Removes extra empty rows, based on the given list of keys to check.
+ * Removes extra empty rows or adds a new empty row, based on the given list of keys to check.
  * An empty row is considered "extra" if it's got other empty rows before it.
  * @param {Array} rows
  * @param {Array} keysToCheck
  */
-export const removeExtraRows = (rows, keysToCheck) => {
+export const updateExtraRows = (rows, keysToCheck) => {
     let last = filterProperties(rows[rows.length - 1], keysToCheck);
     let nextToLast = filterProperties(rows[rows.length - 2], keysToCheck);
 

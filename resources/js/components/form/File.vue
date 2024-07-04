@@ -14,10 +14,8 @@
             accepted-file-types="image/jpeg, image/png, image/gif"
             max-file-size="512kb"
             image-validate-size-min-width="500"
-            :storeAsFile="!fallbackUrl"
             @updatefiles="onUpdateFiles"
             @init="handleFilePondInit"
-            :filePosterFilterItem="fallbackUrl"
         />
         <small :if="$page.props.errors[name]" class="text-rose-700">
             {{ $page.props.errors[name] }}
@@ -48,7 +46,6 @@ const props = defineProps({
     },
     wrapperClasses: String,
     modelValue: Object,
-    fallbackUrl: String,
 });
 
 // Set up FilePond
@@ -60,15 +57,12 @@ const FilePond = vueFilePond(
 );
 
 const pond = ref(null);
+let isFromServer = props.modelValue?.file;
 
 let handleFilePondInit = () => {
-    if (props.fallbackUrl) {
-        try {
-            pond.value.addFile(props.fallbackUrl);
-            pond.value.getFile().origin = "local"; // mark this file as already uploaded
-        } catch {
-            // if we can't load the file, that's fine. Do nothing
-        }
+    if (isFromServer) {
+        pond.value.addFile(props.modelValue.file);
+        pond.value.getFile().origin = "local"; // mark this file as already uploaded
     }
 };
 
@@ -89,7 +83,7 @@ let onUpdateFiles = () => {
         }
     } else {
         // there's no file
-        if (props.fallbackUrl) {
+        if (isFromServer) {
             // but there was one already on the server
             emit("update:modelValue", { file: null, action: "delete" });
         } else {
