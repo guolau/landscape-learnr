@@ -27,6 +27,9 @@
                         wrapperClasses="sm:col-span-6 col-span-12"
                         v-model="form.images[index].file_input"
                         @update:modelValue="onImageInput"
+                        accepted-file-types="image/jpeg, image/png, image/gif"
+                        max-file-size="512kb"
+                        image-validate-size-min-width="500"
                     />
 
                     <div class="sm:col-span-6 col-span-12">

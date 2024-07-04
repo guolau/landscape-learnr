@@ -11,11 +11,9 @@
             :name="name"
             ref="pond"
             :value="modelValue"
-            accepted-file-types="image/jpeg, image/png, image/gif"
-            max-file-size="512kb"
-            image-validate-size-min-width="500"
             @updatefiles="onUpdateFiles"
             @init="handleFilePondInit"
+            v-bind="$attrs"
         />
         <small :if="$page.props.errors[name]" class="text-rose-700">
             {{ $page.props.errors[name] }}
