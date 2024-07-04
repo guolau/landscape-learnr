@@ -13,19 +13,24 @@
                         :alt="mainImage.alt_text"
                     />
                 </a>
-            </div>
-            <div class="flex gap-0.5 mt-2">
-                <img
-                    v-for="(image, index) in snippet.images"
-                    :src="asset(`storage/${image.thumbnail_path}`)"
-                    :alt="image.alt_text"
-                    class="max-w-32 p-1"
-                    :class="{
-                        'border-solid border-[3px] border-neutral-800 p-px':
-                            mainImage.id == image.id,
-                    }"
-                    @click="updateMainImage(image)"
-                />
+                <div
+                    class="flex gap-0.5 mt-2 z-10 overflow-auto"
+                    v-if="snippet.images.length > 1"
+                >
+                    <img
+                        v-for="(image, index) in snippet.images.filter(
+                            (image) => image.thumbnail_path,
+                        )"
+                        :src="asset(`storage/${image.thumbnail_path}`)"
+                        :alt="image.alt_text"
+                        class="max-w-32 p-1"
+                        :class="{
+                            'border-solid border-[3px] border-neutral-800 p-px':
+                                mainImage.id == image.id,
+                        }"
+                        @click="updateMainImage(image)"
+                    />
+                </div>
             </div>
         </div>
         <div class="xl:col-span-3 col-span-1">
