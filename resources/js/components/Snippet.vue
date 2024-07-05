@@ -42,7 +42,7 @@
                     <a
                         v-for="link in snippet.street_view_links"
                         :href="link.url"
-                        class="ll-btn-outline py-0.5 p-3 text-sm !rounded-full"
+                        class="ll-btn-outline ll-btn-sm !rounded-full"
                         target="_blank"
                     >
                         {{ link.title }} <OpenNewWindow />
@@ -52,7 +52,7 @@
                     Tags:
                     <Link
                         v-for="tag in snippet.tags"
-                        class="ll-btn-secondary py-0.5 p-3 rounded-full text-sm"
+                        class="ll-btn-secondary ll-btn-sm rounded-full"
                         href="#"
                         >{{ tag.name }}
                     </Link>
@@ -84,13 +84,7 @@
 </template>
 
 <script setup>
-import {
-    Link as LinkIcon,
-    OpenNewWindow,
-    Edit,
-    EditPencil,
-    PlusCircle,
-} from "@iconoir/vue";
+import { Link as LinkIcon, OpenNewWindow, Edit } from "@iconoir/vue";
 import { asset, formatRelativeDate, formatDate } from "@components/Utils.js";
 import { ref } from "vue";
 
