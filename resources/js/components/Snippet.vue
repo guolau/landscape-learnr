@@ -1,20 +1,11 @@
 <template>
     <section
-        class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-7"
+        class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-9 grid-cols-1 gap-7"
     >
-        <div class="xl:col-span-2 col-span-1">
-            <div v-if="mainImage">
-                <a
-                    :href="asset(`storage/${mainImage.image_path}`)"
-                    target="_blank"
-                >
-                    <img
-                        :src="asset(`storage/${mainImage.image_path}`)"
-                        :alt="mainImage.alt_text"
-                    />
-                </a>
+        <div class="xl:col-span-2 lg:col-span-1 md:col-span-5 col-span-1">
+            <div v-if="mainImage" class="grid grid-cols-8 gap-2">
                 <div
-                    class="flex gap-0.5 mt-2 z-10 overflow-auto"
+                    class="flex flex-col col-span-1 gap-0.5 overflow-auto"
                     v-if="snippet.images.length > 1"
                 >
                     <img
@@ -31,9 +22,19 @@
                         @click="updateMainImage(image)"
                     />
                 </div>
+                <a
+                    :href="asset(`storage/${mainImage.image_path}`)"
+                    target="_blank"
+                    class="col-span-7"
+                >
+                    <img
+                        :src="asset(`storage/${mainImage.image_path}`)"
+                        :alt="mainImage.alt_text"
+                    />
+                </a>
             </div>
         </div>
-        <div class="xl:col-span-3 col-span-1">
+        <div class="xl:col-span-3 lg:col-span-1 md:col-span-4 col-span-1">
             <div class="flex flex-col gap-3">
                 <h2 class="border-none mb-0">{{ snippet.title }}</h2>
                 <div v-html="snippet.body_html"></div>

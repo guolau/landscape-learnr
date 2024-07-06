@@ -37,7 +37,7 @@ hr {
 */
 /* Purely stylistic; use when you want a white background for a container. */
 .ll-panel {
-    @apply my-4 p-10 bg-neutral-50 rounded shadow-md;
+    @apply my-4 p-8 bg-neutral-50 rounded shadow-md;
 }
 
 /*
