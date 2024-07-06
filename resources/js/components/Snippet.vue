@@ -3,7 +3,8 @@
         class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-9 grid-cols-1 gap-7"
     >
         <div class="xl:col-span-2 lg:col-span-1 md:col-span-5 col-span-1">
-            <div v-if="mainImage" class="grid grid-cols-8 gap-2">
+            <div class="grid grid-cols-8 gap-2">
+                <!-- Image Options -->
                 <div
                     class="flex flex-col col-span-1 gap-0.5 overflow-auto"
                     v-if="snippet.images.length > 1"
@@ -22,16 +23,45 @@
                         @click="updateMainImage(image)"
                     />
                 </div>
-                <a
-                    :href="asset(`storage/${mainImage.image_path}`)"
-                    target="_blank"
-                    class="col-span-7"
-                >
-                    <img
-                        :src="asset(`storage/${mainImage.image_path}`)"
-                        :alt="mainImage.alt_text"
-                    />
-                </a>
+                <!-- Main Image -->
+                <div v-if="mainImage" class="col-span-7">
+                    <a
+                        :href="asset(`storage/${mainImage.image_path}`)"
+                        target="_blank"
+                    >
+                        <img
+                            :src="asset(`storage/${mainImage.image_path}`)"
+                            :alt="mainImage.alt_text"
+                        />
+                    </a>
+                    <div class="ll-text-muted text-xs mt-1">
+                        <span v-if="mainImage.attribution" class="mr-1.5">
+                            {{ mainImage.attribution }}
+                            <a
+                                v-if="mainImage.source_url"
+                                :href="mainImage.source_url"
+                                target="_blank"
+                            >
+                                <OpenNewWindow></OpenNewWindow>
+                            </a>
+                        </span>
+                        <span v-else-if="mainImage.source_url">
+                            <a
+                                v-if="mainImage.source_url"
+                                :href="mainImage.source_url"
+                                target="_blank"
+                            >
+                                Source <OpenNewWindow></OpenNewWindow>
+                            </a>
+                        </span>
+                        <span v-if="mainImage.license"
+                            >Licensed under
+                            <a :href="mainImage.license_url" target="_blank">
+                                {{ mainImage.license }} </a
+                            >.
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="xl:col-span-3 lg:col-span-1 md:col-span-4 col-span-1">

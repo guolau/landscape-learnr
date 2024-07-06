@@ -24,8 +24,8 @@ class SnippetRequest extends FormRequest
             'images.*.alt_text' => 'nullable|string|max:150',
             'images.*.attribution' => 'nullable|string|max:250',
             'images.*.source_url' => 'nullable|url|max:500',
-            'images.*.license' => 'nullable|string|max:50',
-            'images.*.license_url' => 'nullable|url|max:500',
+            'images.*.license' => 'nullable|string|max:50|required_with:images.*.license_url',
+            'images.*.license_url' => 'nullable|url|max:500|required_with:images.*.license',
             
             'street_view_links' => 'array|max:10',
             'street_view_links.*.id' => 'nullable|numeric|exists:street_view_links',
