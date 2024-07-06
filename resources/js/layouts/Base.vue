@@ -5,7 +5,7 @@
         :icon-props="{
             'stroke-width': 1.7,
             width: '1.05em',
-            height: '1.15em',
+            height: '1.05em',
             class: 'iconoir-svg',
         }"
     >

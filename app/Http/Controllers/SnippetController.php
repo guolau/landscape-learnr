@@ -82,7 +82,13 @@ class SnippetController extends Controller
             ]);
     }
 
-    // public function destroy(): View {
+    public function destroy(Snippet $snippet) {
+        $this->snippetService->destroy($snippet);
 
-    // }
+        return redirect()->route('snippets.index')
+            ->with([
+                'message' => 'Snippet successfully deleted', 
+                'status' => 'success'
+            ]);
+    }
 }

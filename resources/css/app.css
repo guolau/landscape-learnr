@@ -29,7 +29,7 @@ hr {
 }
 
 .iconoir-svg {
-    @apply align-[-10%] inline-block ;
+    @apply align-[-0.15em] inline-block ;
 }
 
 /*
@@ -115,6 +115,10 @@ button, .ll-btn {
 
 .ll-btn-secondary {
     @apply bg-neutral-200 hover:bg-neutral-300 hover:no-underline text-neutral-800;
+}
+
+.ll-btn-danger {
+    @apply border-solid border border-rose-700 hover:bg-rose-50 hover:no-underline text-rose-800;
 }
 
 .ll-btn-outline {

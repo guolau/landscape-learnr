@@ -9,7 +9,7 @@ use App\Models\Tag;
 use App\Models\Image;
 
 class SnippetService {
-    public function store(Collection $validated) {
+    public function store(Collection $validated): Snippet {
         $snippet = Snippet::create($validated->only(['title', 'body_html'])->toArray());
         
         $this->handleImages($snippet, $validated);
@@ -19,7 +19,7 @@ class SnippetService {
         return $snippet;
     }
 
-    public function update(Collection $validated, Snippet $snippet) {
+    public function update(Collection $validated, Snippet $snippet): Snippet {
         $snippet->fill(
             $validated->only(['title', 'body_html'])->toArray()
         );
@@ -119,5 +119,13 @@ class SnippetService {
         }
 
         $snippet->tags()->sync($sync_ids);
+    }
+
+    public function destroy(Snippet $snippet): bool {
+        Image::destroy($snippet->images->pluck('id'));
+
+        $snippet->delete();
+
+        return true;
     }
 }

@@ -13,6 +13,12 @@ class Image extends Model
 
     protected $guarded = ['id'];
 
+    protected static function booted(): void {
+        static::deleted(function (Image $image) {
+            $image->removeFile();
+        });
+    }
+
     public function storeFile($file) {
         $this->removeFile();
 
