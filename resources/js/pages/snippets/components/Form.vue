@@ -148,7 +148,7 @@
 
             <p class="ll-input-hint !text-sm">
                 You can manage tag descriptions and categories in the
-                <Link href="" target="_blank">Tag Manager</Link> (coming soon).
+                <a :href="$route('tags.index')" target="_blank">Tag Manager</a>.
             </p>
 
             <Text

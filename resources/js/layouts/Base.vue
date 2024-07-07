@@ -36,7 +36,11 @@
                                     >Snippets</Link
                                 >
                             </li>
-                            <li><Link href="#">Tag Manager</Link></li>
+                            <li>
+                                <Link :href="$route('tags.index')"
+                                    >Tag Manager</Link
+                                >
+                            </li>
                         </ul>
                     </li>
                 </ul>
