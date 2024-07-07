@@ -105,7 +105,9 @@
                     <Link :href="$route('snippets.show', snippet.id)"
                         ><LinkIcon></LinkIcon> Permalink</Link
                     >
-                    <Link :href="$route('snippets.edit', snippet.id)"
+                    <Link
+                        v-if="user && user.is_admin"
+                        :href="$route('snippets.edit', snippet.id)"
                         ><Edit class="mr-0.5"></Edit> Edit
                     </Link>
                 </div>
@@ -117,11 +119,15 @@
 <script setup>
 import { Link as LinkIcon, OpenNewWindow, Edit } from "@iconoir/vue";
 import { asset, formatRelativeDate, formatDate } from "@components/Utils.js";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
 let props = defineProps({
     snippet: Object,
 });
+
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 const dateFormatOpts = {
     dateStyle: "long",

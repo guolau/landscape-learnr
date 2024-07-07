@@ -88,7 +88,7 @@
 
 <script setup>
 import { IconoirProvider, HeartSolid, NavArrowDown } from "@iconoir/vue";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { usePage } from "@inertiajs/vue3";
 import FlashMessage from "@components/FlashMessage.vue";
 
