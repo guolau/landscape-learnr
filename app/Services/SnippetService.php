@@ -65,8 +65,10 @@ class SnippetService {
 
             // handle image file
             if($image_input['file_input'] ?? false) {
-                if($image_input['file_input']['action'] == 'create')
-                    $image->storeFile($image_input['file_input']['file']);
+                if($image_input['file_input']['action'] == 'create') {
+                    $file = $image_input['file_input']['file'];
+                    $image->storeFile(file_get_contents($file), $file->getClientOriginalName());
+                }
                 else if($image_input['file_input']['action'] == 'delete') {
                     $image->removeFile();
                 }
@@ -87,7 +89,7 @@ class SnippetService {
 
     private function handleStreetViewLinks(Snippet $snippet, Collection $validated) {
         $sync_ids = [];
-
+        
         foreach($validated['street_view_links'] ?? [] as $link) {
             $model = StreetViewLink::find($link['id'] ?? null);
     
@@ -107,7 +109,7 @@ class SnippetService {
             $sync_ids[] = $model->id; 
         }
 
-        $snippet->street_view_links()->whereNotIn('street_view_links.id', $sync_ids)->delete();
+        $snippet->streetViewLinks()->whereNotIn('street_view_links.id', $sync_ids)->delete();
     }
 
     private function handleTags(Snippet $snippet, Collection $validated) {

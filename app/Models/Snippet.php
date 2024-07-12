@@ -28,7 +28,7 @@ class Snippet extends Model
         return $this->hasMany(Image::class)->orderBy('id');
     }
 
-    public function street_view_links() {
+    public function streetViewLinks() {
         return $this->hasMany(StreetViewLink::class)->orderBy('id');
     }
 

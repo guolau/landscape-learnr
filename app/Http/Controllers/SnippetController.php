@@ -40,14 +40,14 @@ class SnippetController extends Controller
 
     public function show(Snippet $snippet) {
         return inertia('snippets/Show', [
-            'snippet' => $snippet->load('images', 'street_view_links', 'tags')
+            'snippet' => $snippet->load('images', 'streetViewLinks', 'tags')
         ]);
     }
 
     public function edit(Snippet $snippet) {
         $snippet = $snippet->load([
             'images:id,snippet_id,thumbnail_path,alt_text,attribution,license,license_url,source_url', 
-            'street_view_links:id,snippet_id,title,url', 
+            'streetViewLinks:id,snippet_id,title,url', 
             'tags:id,name'
         ]);
 
