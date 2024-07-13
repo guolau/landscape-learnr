@@ -24,7 +24,13 @@
                     />
                 </div>
                 <!-- Main Image -->
-                <div v-if="mainImage" class="col-span-7">
+                <div
+                    v-if="mainImage"
+                    :class="[
+                        { 'col-span-7': snippet.images.length > 1 },
+                        { 'col-span-8': snippet.images.length <= 1 },
+                    ]"
+                >
                     <a
                         :href="asset(`storage/${mainImage.image_path}`)"
                         target="_blank"
