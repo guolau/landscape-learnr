@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Snippet;
+use App\Models\Tag;
+use App\Models\StreetViewLink;
+use App\Models\Image;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +17,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
-            'name' => 'Test User',
+            'username' => 'admin',
             'email' => 'test@example.com',
+            'password' => 'Test123',
+            'is_admin' => true,
         ]);
+
+        Snippet::factory()
+            ->count(55)
+            ->has(Tag::factory()->count(5))
+            ->has(StreetViewLink::factory()->count(2))
+            ->has(Image::factory()->count(1))
+            ->create();
     }
 }
