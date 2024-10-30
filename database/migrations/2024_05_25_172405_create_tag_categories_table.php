@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tag_types', function (Blueprint $table) {
+        Schema::create('tag_categories', function (Blueprint $table) {
             $table->id();
 
             $table->string('name', length: 50);
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tag_types');
+        Schema::dropIfExists('tag_categories');
     }
 };
