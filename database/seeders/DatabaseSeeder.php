@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Snippet;
+use App\Models\TagCategory;
 use App\Models\Tag;
 use App\Models\StreetViewLink;
 use App\Models\Image;
@@ -24,9 +25,16 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
+        TagCategory::factory()
+            ->count(7)
+            ->create();
+
+        Tag::factory()
+            ->count(75)
+            ->create();
+
         Snippet::factory()
             ->count(55)
-            ->has(Tag::factory()->count(5))
             ->has(StreetViewLink::factory()->count(2))
             ->has(Image::factory()->count(1))
             ->create();

@@ -14,4 +14,8 @@ class Tag extends Model
     public function snippets() {
         return $this->belongsToMany(Snippet::class);
     }
+    
+    public function tagCategory() {
+        return $this->belongsTo(TagCategory::class);
+    }
 }

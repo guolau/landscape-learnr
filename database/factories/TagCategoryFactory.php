@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\TagCategory;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TagCategory>
  */
-class TagFactory extends Factory
+class TagCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +16,7 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
-        $tag_category_id = TagCategory::inRandomOrder()->first()->id;
-
         return [
-            'tag_category_id' => $tag_category_id,
             'name' => fake()->unique()->words(2, true),
             'description' => fake()->sentence(8),
         ];
