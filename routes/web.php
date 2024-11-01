@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TagCategoryController;
 
 Route::get('/', function () {
     return inertia('Home');
@@ -33,6 +34,12 @@ Route::group(['prefix' => 'tags'], function() {
     });
 
     Route::get('/{tag}', [TagController::class, 'show'])->name('tags.show');
+});
+
+Route::group(['prefix' => 'tag-categories'], function() {
+    Route::group(['middleware' => 'can:manage,'.App\Models\Tag::class], function () {
+        Route::get('/', [TagCategoryController::class, 'index'])->name('tagCategories.index');
+    });
 });
 
 require __DIR__.'/auth.php';

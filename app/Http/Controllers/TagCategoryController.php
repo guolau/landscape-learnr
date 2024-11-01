@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
+use App\Models\TagCategory;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class TagCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return inertia('tags/Index', [
-            'tags' => Tag::orderBy('name')
-                ->withCount('snippets')
-                ->with(['tagCategory'])
+        return inertia('tagCategories/Index', [
+            'categories' => TagCategory::orderBy('name')
+                ->with([
+                    'tags' => fn ($tags) => $tags->limit(5) 
+                ])
+                ->withCount('tags')
                 ->paginate(100)
         ]);
     }

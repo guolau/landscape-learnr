@@ -21,7 +21,7 @@ class TagFactory extends Factory
         $tag_category_id = TagCategory::inRandomOrder()->first()->id;
 
         return [
-            'tag_category_id' => $tag_category_id,
+            'tag_category_id' => rand(0,100) > 20 ? $tag_category_id : null,
             'name' => fake()->unique()->words(2, true),
             'description' => fake()->sentence(8),
         ];

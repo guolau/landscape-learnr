@@ -37,8 +37,11 @@
                                 >
                             </li>
                             <li>
-                                <Link :href="$route('tags.index')"
-                                    >Tag Manager</Link
+                                <Link :href="$route('tags.index')">Tags</Link>
+                            </li>
+                            <li>
+                                <Link :href="$route('tagCategories.index')"
+                                    >Tag Categories</Link
                                 >
                             </li>
                         </ul>
