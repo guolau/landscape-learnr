@@ -67,6 +67,8 @@
                 </div>
             </div>
         </section>
+
+        <Pagination :links="categories.links"></Pagination>
     </main>
 </template>
 
