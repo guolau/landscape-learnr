@@ -2,6 +2,12 @@
     <main class="ll-panel mx-auto max-w-5xl">
         <div class="flex justify-between items-start">
             <h1>Tags</h1>
+            <select v-model="category_id" class="ll-input-sm">
+                <option value="">Filter category</option>
+                <option v-for="category in categories" :value="category.id">
+                    {{ category.name }}
+                </option>
+            </select>
         </div>
         <section
             v-if="tags.data.length == 0"
@@ -68,13 +74,28 @@
 import { formatRelativeDate, formatDate } from "@components/Utils.js";
 import { EditPencil, Refresh, Database } from "@iconoir/vue";
 import Pagination from "@components/Pagination.vue";
+import { ref, watch } from "vue";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
     tags: Object,
+    categories: Object,
+    filters: Object,
 });
 
 const dateFormatOpts = {
     dateStyle: "long",
     timeStyle: "short",
 };
+
+let category_id = ref(
+    props.filters.category_id == undefined ? "" : props.filters.category_id,
+);
+
+watch(category_id, (value) => {
+    router.visit(route("tags.index"), {
+        preserveState: true,
+        data: { category_id: category_id.value },
+    });
+});
 </script>

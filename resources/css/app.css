@@ -41,8 +41,18 @@ hr {
 }
 
 /*
-    Forms
+    Forms and Inputs
 */
+input:not([type="checkbox"]),
+textarea,
+select {
+    @apply !border-neutral-300 rounded focus:ring-blue-500 focus:ring-inset;
+}
+
+.ll-input-sm {
+    @apply py-1 text-sm;
+}
+
 /* Form groups consist of a label, input hints, and an input. */
 .ll-form-group {
     @apply block mt-3;
@@ -76,7 +86,7 @@ form h2 {
 input.ll-form-input:not([type="checkbox"]),
 textarea.ll-form-input,
 select.ll-form-input {
-    @apply w-full block border-neutral-300 rounded focus:ring-blue-500 focus:ring-inset;
+    @apply w-full block;
 }
 
 input.ll-form-input[type="checkbox"] {

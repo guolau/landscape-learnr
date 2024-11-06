@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\TagCategory;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -10,13 +11,20 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return inertia('tags/Index', [
-            'tags' => Tag::orderBy('name')
+            'tags' => Tag::query()
+                ->when($request->category_id, fn ($query, $category_id) => 
+                    $query->where('tag_category_id', $category_id)
+                )
+                ->orderBy('name')
                 ->withCount('snippets')
                 ->with(['tagCategory'])
-                ->paginate(100)
+                ->paginate(50)
+                ->withQueryString(),
+            'categories' => TagCategory::orderBy('name')->get(),
+            'filters' => $request->only(['category_id'])
         ]);
     }
 

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Tag::factory()
-            ->count(75)
+            ->count(175)
             ->create();
 
         Snippet::factory()
