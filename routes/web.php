@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagCategoryController;
@@ -9,6 +10,12 @@ use App\Http\Controllers\TagCategoryController;
 Route::get('/', function () {
     return inertia('Home');
 })->name('home');
+
+Route::group(['prefix' => 'settings', 'middleware' => 'admin'], function() {
+    Route::get('/', [SettingController::class, 'index'])->name('settings');
+    Route::post('/', [SettingController::class, 'update'])->name('settings.update');
+
+});
 
 Route::group(['prefix' => 'snippets'], function() {
     Route::group(['middleware' => 'can:manage,'.App\Models\Snippet::class], function () {

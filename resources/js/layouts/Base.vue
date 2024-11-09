@@ -44,6 +44,9 @@
                                     >Tag Categories</Link
                                 >
                             </li>
+                            <li>
+                                <Link :href="$route('settings')">Settings</Link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
