@@ -1,14 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SnippetController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TagCategoryController;
+use App\Models\Setting;
+use App\Models\Tag;
+use App\Models\TagCategory;
 
-Route::get('/', function () {
-    return inertia('Home');
+Route::get('/', function (Request $request) {
+    $tag_category_id = Setting::where('name', 'search_page_dropdown_tag_category_id')->first()->value;
+
+    return inertia('Home', [
+        'tagCategory' => TagCategory::find($tag_category_id),
+        'tags' => Tag::select(['id', 'name'])
+            ->whereHas('tagCategory', fn ($query) => $query->where('id', $tag_category_id))
+            ->get(),
+    ]);
 })->name('home');
 
 Route::group(['prefix' => 'settings', 'middleware' => 'admin'], function() {
