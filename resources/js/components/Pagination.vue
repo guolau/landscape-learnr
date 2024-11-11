@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex gap-2 mt-5 justify-center">
+    <nav v-if="links.length > 3" class="flex gap-2 mt-5 justify-center">
         <Component
             v-for="(link, index) in links"
             :is="link.url ? 'Link' : 'span'"

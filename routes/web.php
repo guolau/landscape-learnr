@@ -10,6 +10,7 @@ use App\Http\Controllers\TagCategoryController;
 use App\Models\Setting;
 use App\Models\Tag;
 use App\Models\TagCategory;
+use App\Models\Snippet;
 
 Route::get('/', function (Request $request) {
     $tag_category_id = Setting::where('name', 'search_page_dropdown_tag_category_id')->first()->value;
@@ -17,8 +18,26 @@ Route::get('/', function (Request $request) {
     return inertia('Home', [
         'tagCategory' => TagCategory::find($tag_category_id),
         'tags' => Tag::select(['id', 'name'])
-            ->whereHas('tagCategory', fn ($query) => $query->where('id', $tag_category_id))
+            ->whereHas('tagCategory', fn ($query) => $query->where('tag_categories.id', $tag_category_id))
             ->get(),
+        'snippets' => Snippet::query()
+            ->when($request->tag_id, function ($query, $tag_id) {
+                $query->whereHas('tags', fn ($query) => $query->where('tags.id', $tag_id));
+            })
+            ->when($request->keyword, function ($query, $keyword) {
+                $keyword = strtolower($keyword);
+
+                $query->where(function ($query) use ($keyword) {
+                    $query->whereHas('tags', function ($query) use ($keyword) {
+                        $query->where('name', 'ILIKE', "%{$keyword}%");
+                    })
+                    ->orWhere('title', 'ILIKE', "%{$keyword}%"); 
+                });
+            })
+            ->with(['images', 'streetViewLinks', 'tags'])
+            ->paginate(15)
+            ->withQueryString(),
+        'filters' => $request->only(['tag_id', 'keyword'])
     ]);
 })->name('home');
 
