@@ -90,7 +90,7 @@
                     <Link
                         v-for="tag in snippet.tags"
                         class="ll-btn-secondary ll-btn-sm rounded-full"
-                        href="#"
+                        :href="$route('home', { keyword: tag.name })"
                         >{{ tag.name }}
                     </Link>
                 </div>

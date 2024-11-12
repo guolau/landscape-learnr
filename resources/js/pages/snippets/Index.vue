@@ -43,7 +43,7 @@
                     <Link
                         v-for="tag in snippet.tags"
                         class="ll-btn-secondary py-1 p-3 rounded-full text-xs"
-                        href="#"
+                        :href="$route('home', { keyword: tag.name })"
                         >{{ tag.name }}
                     </Link>
                 </div>

@@ -27,13 +27,15 @@
                     <Link
                         v-for="tag in category.tags"
                         class="ll-btn-secondary py-1 p-3 rounded-full text-xs"
-                        href="#"
+                        :href="$route('home', { keyword: tag.name })"
                         >{{ tag.name }}
                     </Link>
                     <Link
                         v-if="category.tags_count > category.tags.length"
                         class="text-sm"
-                        href="#"
+                        :href="
+                            $route('tags.index', { category_id: category.id })
+                        "
                         >View all {{ category.tags_count }} tags</Link
                     >
                 </div>
