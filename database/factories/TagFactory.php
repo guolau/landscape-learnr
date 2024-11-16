@@ -18,6 +18,10 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
+        if(TagCategory::count() == 0) {
+            TagCategory::factory()->create();
+        }
+
         $tag_category_id = TagCategory::inRandomOrder()->first()->id;
 
         return [

@@ -13,6 +13,6 @@ class TagPolicy
      */
     public function manage(User $user): bool
     {
-        return $user->is_admin;
+        return $user && $user->is_admin;
     }
 }
