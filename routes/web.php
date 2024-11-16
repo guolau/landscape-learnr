@@ -14,7 +14,7 @@ use App\Models\Snippet;
 
 Route::get('/', function (Request $request) {
     $tag_category_id = Setting::where('name', 'search_page_dropdown_tag_category_id')->first()->value;
-
+    
     return inertia('Home', [
         'tagCategory' => TagCategory::find($tag_category_id),
         'tags' => Tag::select(['id', 'name'])
