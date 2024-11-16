@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
+use Database\Seeders\TestSeeder;
 
 class HomeTest extends TestCase
 {
@@ -14,7 +15,7 @@ class HomeTest extends TestCase
     {
         parent::setUp();
 
-        $this->seed();
+        $this->seed(TestSeeder::class);
     }
 
     public function test_home_for_guests_returns_a_successful_response(): void 
