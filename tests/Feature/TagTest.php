@@ -27,7 +27,7 @@ class TagTest extends TestCase
         $admin = User::factory()->create(['is_admin' => true]);
         $response = $this->actingAs($admin)->get(route('tags.index'));
         
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertInertia(function (Assert $page) {
             $page->component('tags/Index')
                 ->has('tags', function (Assert $page) {
@@ -45,42 +45,42 @@ class TagTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get(route('tags.index'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->actingAs($user)->get(route('tags.create'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->actingAs($user)->post(route('tags.store'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->actingAs($user)->get(route('tags.edit', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->actingAs($user)->patch(route('tags.update', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->actingAs($user)->delete(route('tags.destroy', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
     
     public function test_tags_admin_routes_return_forbidden_response_for_guests(): void
     {
         $response = $this->get(route('tags.index'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->get(route('tags.create'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->post(route('tags.store'));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->get(route('tags.edit', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->patch(route('tags.update', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
         
         $response = $this->delete(route('tags.destroy', $this->tag));
-        $response->assertStatus(403);
+        $response->assertForbidden();
     }
 }

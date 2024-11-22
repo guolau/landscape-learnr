@@ -25,7 +25,7 @@ class HomeTest extends TestCase
     {
         $response = $this->get(route('home'));
         
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertInertiaResponse($response);
     }
 
@@ -35,7 +35,7 @@ class HomeTest extends TestCase
     
         $response = $this->actingAs($user)->get(route('home'));
         
-        $response->assertStatus(200);
+        $response->assertOk();
         $this->assertInertiaResponse($response);
     }
 
