@@ -22,7 +22,7 @@ class TagTest extends TestCase
         $this->tag = Tag::factory()->create();
     }
 
-    public function test_tag_index_route(): void
+    public function test_tags_index_route(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
         $response = $this->actingAs($admin)->get(route('tags.index'));
@@ -41,7 +41,7 @@ class TagTest extends TestCase
         });
     }
 
-    public function test_tag_admin_routes_return_forbidden_response_for_non_admin_users(): void
+    public function test_tags_admin_routes_return_forbidden_response_for_non_admin_users(): void
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get(route('tags.index'));
@@ -63,7 +63,7 @@ class TagTest extends TestCase
         $response->assertStatus(403);
     }
     
-    public function test_tag_admin_routes_return_forbidden_response_for_guests(): void
+    public function test_tags_admin_routes_return_forbidden_response_for_guests(): void
     {
         $response = $this->get(route('tags.index'));
         $response->assertStatus(403);
