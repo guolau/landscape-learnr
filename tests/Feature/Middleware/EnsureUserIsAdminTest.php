@@ -13,7 +13,6 @@ class EnsureUserIsAdminTest extends TestCase
 {
     use RefreshDatabase;
 
-    private $middleware;
     private $route;
     private $testUrl;
 
@@ -22,7 +21,6 @@ class EnsureUserIsAdminTest extends TestCase
         parent::setUp();
 
         $this->testUrl = '/test-ensure-user-is-admin';
-        $this->middleware = new EnsureUserIsAdmin;
 
         \Route::middleware('admin')->get($this->testUrl, function () { return ''; });
     }
