@@ -74,7 +74,7 @@
             <div class="flex flex-col gap-3">
                 <h2 class="border-none mb-0">{{ snippet.title }}</h2>
                 <div v-html="snippet.body_html"></div>
-                <div class="flex gap-2 items-center">
+                <div class="flex flex-wrap gap-2 items-center">
                     Street View:
                     <a
                         v-for="link in snippet.street_view_links"
