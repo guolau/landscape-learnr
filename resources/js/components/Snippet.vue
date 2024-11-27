@@ -1,8 +1,8 @@
 <template>
     <section
-        class="ll-panel grid xl:grid-cols-5 lg:grid-cols-2 md:grid-cols-9 grid-cols-1 gap-7"
+        class="ll-panel grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-9 grid-cols-1 gap-7"
     >
-        <div class="xl:col-span-2 lg:col-span-1 md:col-span-5 col-span-1">
+        <div class="xl:col-span-1 lg:col-span-1 md:col-span-5 col-span-1">
             <div class="grid grid-cols-8 gap-2">
                 <!-- Image Options -->
                 <div
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="xl:col-span-3 lg:col-span-1 md:col-span-4 col-span-1">
+        <div class="xl:col-span-1 lg:col-span-1 md:col-span-4 col-span-1">
             <div class="flex flex-col gap-3">
                 <h2 class="border-none mb-0">{{ snippet.title }}</h2>
                 <div v-html="snippet.body_html"></div>
@@ -79,7 +79,7 @@
                     <a
                         v-for="link in snippet.street_view_links"
                         :href="link.url"
-                        class="ll-btn-outline ll-btn-sm !rounded-full"
+                        class="ll-btn-outline ll-btn-xs !rounded-full"
                         target="_blank"
                     >
                         {{ link.title }} <OpenNewWindow />
@@ -89,7 +89,7 @@
                     Tags:
                     <Link
                         v-for="tag in snippet.tags"
-                        class="ll-btn-secondary ll-btn-sm rounded-full"
+                        class="ll-btn-secondary ll-btn-xs rounded-full"
                         :href="$route('home', { keyword: tag.name })"
                         >{{ tag.name }}
                     </Link>

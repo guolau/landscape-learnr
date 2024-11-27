@@ -115,6 +115,10 @@ button, .ll-btn {
     @apply py-2 px-3 rounded hover:no-underline;
 }
 
+.ll-btn-xs {
+    @apply py-0.5 px-2 text-sm;
+}
+
 .ll-btn-sm {
     @apply py-1 px-2 text-sm;
 }
