@@ -1,5 +1,7 @@
+⚠️ **This project is still in the alpha stage!**
+
 # Introduction
-LandscapeLearnr is an reference site for [GeoGuessr](https://www.geoguessr.com/) players, created with a [Laravel](https://laravel.com/) backend and [Vue.js](https://vuejs.org/) frontend.
+LandscapeLearnr is an reference site for [GeoGuessr](https://www.geoguessr.com/) players, created with a [Laravel](https://laravel.com/) backend and [Vue.js](https://vuejs.org/) frontend. 
 
 In GeoGuessr, you're dropped somewhere on Google Street View. Based on features like architecture, vegetation, and road signs, your goal is to try and guess your location. 
 
