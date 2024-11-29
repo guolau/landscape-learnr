@@ -15,7 +15,7 @@ class SnippetRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:150',
-            'body_html' => 'nullable|string|max:65500',
+            'body_html' => 'string|max:65500',
 
             'images' => 'array|max:10',
             'images.*.id' => 'nullable|numeric|exists:images',
