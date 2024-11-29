@@ -21,6 +21,7 @@ Thank you for taking a look!
 # Roadmap
 Here's a tentative list of things I'd like to do at some point:
 * Write automated tests
+* Address site performance issues noted on the PageSpeed Insights report
 * Improve snippet image browsing functionality, like ability to use keyboard arrow keys
 * When adding tags to snippets, suggest tags based on user input and existing tags
 * On the main search page, add sorting by date, title, relevance, etc.
