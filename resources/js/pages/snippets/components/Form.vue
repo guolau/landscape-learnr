@@ -4,10 +4,9 @@
             <h2>Title and Body</h2>
 
             <Text name="title" v-model="form.title" max-length="150" required />
-            <TextArea
+            <HtmlEditor
                 name="body_html"
                 label="Body"
-                :is_html_editor="true"
                 v-model="form.body_html"
             />
         </section>
@@ -222,6 +221,7 @@
 <script setup>
 import { ref } from "vue";
 import Text from "@components/form/Text.vue";
+import HtmlEditor from "@components/form/HtmlEditor.vue";
 import TextArea from "@components/form/TextArea.vue";
 import File from "@components/form/File.vue";
 import Checkbox from "@components/form/Checkbox.vue";

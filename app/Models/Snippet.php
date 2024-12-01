@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Mews\Purifier\Casts\CleanHtmlOutput;
 use App\Models\Tag;
 use App\Models\Image;
 use App\Models\StreetViewLink;
@@ -15,14 +15,9 @@ class Snippet extends Model
 
     protected $guarded = ['id'];
     protected $casts = [
+        'body_html' => CleanHtmlOutput::class,
         'revised_at' => 'datetime',
     ];
-
-    protected function bodyHtml(): Attribute {
-        return Attribute::make(
-            set: fn (string $value) => clean($value),
-        );
-    }
 
     public function images() {
         return $this->hasMany(Image::class)->orderBy('id');
